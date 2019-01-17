@@ -1,0 +1,54 @@
+/
+公用页面
+    首页：index.html  导航栏：默认为普通用户导航栏
+
+    /
+    登录页面：login.html
+    注册页面：register.html
+    广告商登录页面：adver_login.html
+    管理员登录页面：admin_login.html
+    商家登录页面：seller_login.html
+
+/
+普通用户页面：  
+    导航栏：登录|注册|用户中心|我的购物车|我的订单
+    /product/
+    商品列表页面：list.html
+    商品详情页面：detial.html
+    购物车页面：cart.html
+    订单页面（同用户订单页面）：user_center_order.html
+    支付页面：pay.html
+
+    /user/
+    个人中心：（默认显示个人信息页面）
+    个人信息页面：user_center_info.html 
+    订单页面：user_center_order.html 
+    收货地址页面：user_center_site.html 
+    实名认证页面：user_center_verify.html
+
+/seller/
+商家页面：
+    导航栏：管理商品|发布商品|管理订单
+    /seller/
+    商家管理页面（默认管理商品页面）：
+        管理商品页面：seller_items.html
+        发布商品页面：seller_release.html
+        管理订单页面：seller_order.html
+
+/admin/
+管理员页面：
+    导航栏：管理用户|管理商品|管理订单|管理广告
+    /admin/
+    管理员管理页面(默认注册用户页面)：
+        管理注册用户页面：admin_userinfo.html
+        管理已有商品页面：admin_productinfo.html
+        管理订单页面：admin_order.html
+        管理广告页面：admin_adver.html
+
+/adver/
+广告商页面： 
+    导航栏：管理广告|发布广告
+    /adver/
+    广告商管理页面（默认管理已有广告页面）：
+        管理已有广告：adver_manage.html
+        发布新广告：adver_release.html
