@@ -61,14 +61,14 @@ def create_app(config_name):
     Session(app)
 
     # 为flask补充csrf防护
-    CSRFProtect(app)
+    # CSRFProtect(app)
 
     # 为flask添加自定义的转换器
     app.url_map.converters["re"] = ReConverter
 
     # 注册蓝图
     from saihan import admin, adver, seller, user, common
-    app.register_blueprint(common.app_common, url_prefix="/")
+    app.register_blueprint(common.app_common, url_prefix="/common")
     app.register_blueprint(admin.app_admin, url_prefix="/admin")
     app.register_blueprint(adver.app_adver, url_prefix="/adver")
     app.register_blueprint(seller.app_seller, url_prefix="/seller")

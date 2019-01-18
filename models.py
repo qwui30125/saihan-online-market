@@ -2,7 +2,7 @@
 
 import datetime
 import werkzeug.security
-from . import db
+from saihan import db
 
 
 class BaseModel(object):
@@ -14,7 +14,7 @@ class BaseModel(object):
 
 class User(BaseModel, db.Model):
     """用户"""
-    __tablename__ = "ih_user"
+    __tablename__ = "user"
 
     id = db.Column(db.Integer, primary_key=True)  # 用户编号
     type = db.Column(  # 账户类型
@@ -55,10 +55,10 @@ class User(BaseModel, db.Model):
 
 class Profile(BaseModel, db.Model):
     """个人资料"""
-    __tablename__ = "ih_user_profile"
+    __tablename__ = "user_profile"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("ih_user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     mobile = db.Column(db.String(11), unique=True, nullable=False)  # 手机号
     nickname = db.Column(db.String(32))  # 昵称
     avatar = db.Column(db.String(128))  # 用户头像路径
@@ -72,10 +72,10 @@ class Profile(BaseModel, db.Model):
 
 class Address(BaseModel, db.Model):
     """地址"""
-    __tablename__ = "ih_user_addresses"
+    __tablename__ = "user_addresses"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("ih_user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     country = db.Column(db.String(32))  # 国家
     province = db.Column(db.String(32))  # 省/直辖市
     city = db.Column(db.String(32))  # 城市
@@ -86,9 +86,9 @@ class Address(BaseModel, db.Model):
 
 class Authenticate(BaseModel, db.Model):
     """实名认证信息"""
-    __tablename__ = "ih_user_authenticates"
+    __tablename__ = "user_authenticates"
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("ih_user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     type = db.Column(  # 认证类型
         db.Enum(  # 枚举
            "PERSONAL",  # 个人,
@@ -107,19 +107,19 @@ class Authenticate(BaseModel, db.Model):
 
 class AuthenticateDocuments(BaseModel, db.Model):
     """认证使用的文件"""
-    __tablename__ = "ih_user_authenticate_documents"
+    __tablename__ = "user_authenticate_documents"
 
     id = db.Column(db.Integer, primary_key=True)
-    apply_id = db.Column(db.Integer, db.ForeignKey("ih_user_authenticates.id"), nullable=False)
+    apply_id = db.Column(db.Integer, db.ForeignKey("user_authenticates.id"), nullable=False)
     filename = db.Column(db.String(64), nullable=False)  # 文件名
 
 
 class Product(BaseModel, db.Model):
     """商品"""
-    __tablename__ = "ih_products"
+    __tablename__ = "products"
 
     id = db.Column(db.Integer, primary_key=True)
-    seller = db.Column(db.Integer, db.ForeignKey("ih_user.id"), nullable=False)
+    seller = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     name = db.Column(db.String(32), nullable=False)
     description = db.Column(db.Text())
     price = db.Column(db.Integer, nullable=False)
@@ -128,11 +128,11 @@ class Product(BaseModel, db.Model):
 
 class Order(BaseModel, db.Model):
     """订单"""
-    __tablename__ = "ih_orders"
+    __tablename__ = "orders"
 
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey("ih_products.id"), nullable=False)
-    buyer_id = db.Column(db.Integer, db.ForeignKey("ih_user.id"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
+    buyer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     status = db.Column(  # 订单状态
         db.Enum(
             "PENDING",  # 新订单
@@ -147,10 +147,10 @@ class Order(BaseModel, db.Model):
 
 class Status(BaseModel, db.Model):
     """评价"""
-    __tablename__ = "ih_statuses"
+    __tablename__ = "statuses"
     id = db.Column(db.Integer, primary_key=True)
-    source_id = db.Column(db.Integer, db.ForeignKey("ih_user.id"), nullable=False)  # 评价人
-    target_id = db.Column(db.Integer, db.ForeignKey("ih_user.id"), nullable=False)  # 被评价人
+    source_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)  # 评价人
+    target_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)  # 被评价人
     level = db.Column(  # 评价等级
         db.Enum(
             "PENDING",  # 没有作出评价
@@ -165,7 +165,7 @@ class Status(BaseModel, db.Model):
 
 class ProductMedia(BaseModel, db.Model):
     """商品照片"""
-    __tablename__ = "ih_product_medias"
+    __tablename__ = "product_medias"
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey("ih_products.id"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
     filename = db.Column(db.String(64), nullable=False)  # 文件名

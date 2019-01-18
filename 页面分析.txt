@@ -8,16 +8,15 @@
     广告商登录页面：adver_login.html
     管理员登录页面：admin_login.html
     商家登录页面：seller_login.html
-
-/
-普通用户页面：  
-    导航栏：登录|注册|用户中心|我的购物车|我的订单
     /product/
     商品列表页面：list.html
     商品详情页面：detial.html
     购物车页面：cart.html
     订单页面（同用户订单页面）：user_center_order.html
     支付页面：pay.html
+
+普通用户页面：  
+    导航栏：登录|注册|用户中心|我的购物车|我的订单
 
     /user/
     个人中心：（默认显示个人信息页面）

@@ -8,7 +8,7 @@ class Config(object):
     SECRET_KEY = "XHSOI*Y9dfs9cshd9"
 
     # 数据库
-    SQLALCHEMY_DATABASE_URI = "mysql://root:mysql@127.0.0.1:3306/ihome_python04"
+    SQLALCHEMY_DATABASE_URI = "mysql://root:123456@127.0.0.1:3306/saihan"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
     # redis
