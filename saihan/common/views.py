@@ -2,7 +2,7 @@
 
 from . import app_common
 from saihan import db
-from flask import render_template, request
+from flask import render_template, request, session
 from saihan.models import User
 # from saihan.models import ...
 
@@ -60,25 +60,22 @@ def register():
     user = User(username=username, type="PERSONAL")
     user.password = password  # 设置属性
     print(user.password_hash)
-    # try:
-    #     db.session.add(user)
-    #     db.session.commit()
-    # except IntegrityError as e:
-    #     # 数据库操作错误后的回滚
-    #     db.session.rollback()
-    #     # 表示手机号出现了重复值，即手机号已注册过
-    #     current_app.logger.error(e)
-    #     return jsonify(errno=RET.DATAEXIST, errmsg="手机号已存在")
-    # except Exception as e:
-    #     db.session.rollback()
-    #     # 表示手机号出现了重复值，即手机号已注册过
-    #     current_app.logger.error(e)
-    #     return jsonify(errno=RET.DBERR, errmsg="查询数据库异常")
+    try:
+        db.session.add(user)
+        db.session.commit()
+    except IntegrityError as e:
+        # 数据库操作错误后的回滚
+        db.session.rollback()
+        raise
+        return "用户已存在"
+    except Exception as e:
+        db.session.rollback()
+        raise
+        return "查询数据库异常"
 
     # # 保存登录状态到session中
-    # session["name"] = mobile
-    # session["mobile"] = mobile
-    # session["user_id"] = user.id
+    session["username"] = username
+    session["user_id"] = user.id
 
     # # 返回结果
     # return jsonify(errno=RET.OK, errmsg="注册成功")
