@@ -8,7 +8,6 @@
     广告商登录页面：adver_login.html
     管理员登录页面：admin_login.html
     商家登录页面：seller_login.html
-    /product/
     商品列表页面：list.html
     商品详情页面：detial.html
     购物车页面：cart.html

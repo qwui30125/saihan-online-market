@@ -66,8 +66,8 @@ class Profile(BaseModel, db.Model):
     addresses = db.relationship("Address", backref="user")
     products = db.relationship("Product", backref="seller")
     orders = db.relationship("Order", backref="buyer")
-    statuses_sent = db.relationship("Status", backref="source")
-    statuses_received = db.relationship("Status", backref="target")
+    # statuses_sent = db.relationship("Status", backref="source")
+    # statuses_received = db.relationship("Status", backref="target")
 
 
 class Address(BaseModel, db.Model):
@@ -75,7 +75,7 @@ class Address(BaseModel, db.Model):
     __tablename__ = "user_addresses"
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)
     country = db.Column(db.String(32))  # 国家
     province = db.Column(db.String(32))  # 省/直辖市
     city = db.Column(db.String(32))  # 城市
@@ -119,7 +119,7 @@ class Product(BaseModel, db.Model):
     __tablename__ = "products"
 
     id = db.Column(db.Integer, primary_key=True)
-    seller = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)
     name = db.Column(db.String(32), nullable=False)
     description = db.Column(db.Text())
     price = db.Column(db.Integer, nullable=False)
@@ -132,7 +132,7 @@ class Order(BaseModel, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
-    buyer_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    buyer_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)
     status = db.Column(  # 订单状态
         db.Enum(
             "PENDING",  # 新订单
@@ -149,8 +149,9 @@ class Status(BaseModel, db.Model):
     """评价"""
     __tablename__ = "statuses"
     id = db.Column(db.Integer, primary_key=True)
-    source_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)  # 评价人
-    target_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)  # 被评价人
+    order_id = db.Column(db.Integer,  db.ForeignKey("orders.id"), nullable=False)
+    # source_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)  # 评价人
+    # target_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)  # 被评价人
     level = db.Column(  # 评价等级
         db.Enum(
             "PENDING",  # 没有作出评价

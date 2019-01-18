@@ -58,9 +58,8 @@ def register():
 
     # 保存用户的注册数据到数据库中
     user = User(username=username, type="PERSONAL")
-    user.generate_password_hash(password)
-    user.password_hash = password  # 设置属性
-    print(password)
+    user.password = password  # 设置属性
+    print(user.password_hash)
     # try:
     #     db.session.add(user)
     #     db.session.commit()
@@ -83,3 +82,4 @@ def register():
 
     # # 返回结果
     # return jsonify(errno=RET.OK, errmsg="注册成功")
+    return "注册成功"
