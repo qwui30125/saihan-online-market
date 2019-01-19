@@ -33,6 +33,7 @@ def seller_order():
     if request.method == "GET":
         return render_template("seller_order.html")
     else:
+        pass
         
 
 
