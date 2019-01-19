@@ -74,9 +74,66 @@ def register():
         return "查询数据库异常"
 
     # # 保存登录状态到session中
-    session["username"] = username
+    session["username"] = user.username
     session["user_id"] = user.id
 
     # # 返回结果
     # return jsonify(errno=RET.OK, errmsg="注册成功")
     return "注册成功"
+
+
+@app_common.route("/login", methods=["GET", "POST"])
+def login():
+    """用户登录
+    参数： 用户名、密码
+    """
+    # 检查请求方式，GET请求返回登录页面
+    method = request.method
+    if method == "GET":
+        return render_template("login.html")
+    # 获取参数
+    req_dict = request.form.to_dict()
+    print(req_dict)
+    username = req_dict.get("username")
+    password = req_dict.get("pwd")
+
+    # 校验参数
+    # 参数完整的校验
+    if not all([username, password]):
+        return "参数不完整"
+
+    # 从数据库中根据手机号查询用户的数据对象
+    try:
+        user = User.query.filter_by(username=username).first()
+    except Exception as e:
+        raise
+        return "获取用户信息失败"
+
+    # 用数据库的密码与用户填写的密码进行对比验证
+    if user is None or not user.check_password(password):
+        return "用户名或密码错误"
+
+    # 如果验证相同成功，保存登录状态， 在session中
+    session["username"] = user.username
+    session["user_id"] = user.id
+
+    return "登录成功"
+
+@app_common.route("/session", methods=["GET"])
+def check_login():
+    """检查登陆状态"""
+    # 尝试从session中获取用户的名字
+    username = session.get("username")
+    # 如果session中数据name名字存在，则表示用户已登录，否则未登录
+    if username is not None:
+        return "已登录"
+    else:
+        return "未登录"
+
+
+@app_common.route("/session", methods=["DELETE"])
+def logout():
+    """登出"""
+    # 清除session数据
+    session.clear()
+    return "已登出"
