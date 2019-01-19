@@ -2,12 +2,16 @@
 
 from . import app_common
 from saihan import db
-from flask import render_template, request, session, redirect
+from flask import render_template, request, session, redirect, url_for, flash
 from saihan.models import User
 # from saihan.models import ...
 
 @app_common.route("/index")
 def index():
+    if 'username' in session:
+        user_id = session["user_id"]
+        username = session["username"]
+        return render_template("index.html", username=username)
     return render_template("index.html")
 
 
@@ -83,8 +87,8 @@ def register():
     session["user_id"] = user.id
 
     # # 返回结果
-    # return jsonify(errno=RET.OK, errmsg="注册成功")
-    return "注册成功"
+    flash('登录成功')
+    return redirect(url_for("common.index"))
 
 
 @app_common.route("/login", methods=["GET", "POST"])
@@ -122,7 +126,8 @@ def login():
     session["username"] = user.username
     session["user_id"] = user.id
 
-    return redirect(url_for("index"))
+    flash('登录成功')
+    return redirect(url_for("common.index"))
 
 @app_common.route("/session", methods=["GET"])
 def check_login():

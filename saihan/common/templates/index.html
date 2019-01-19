@@ -9,20 +9,32 @@
 	<script type="text/javascript" src="/static/js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/static/js/slide.js"></script>
 	<link rel="shortcut icon" href="static/images/123.jpg" type="image/x-icon">
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+	    <ul class=flashes>
+	    {% for message in messages %}
+	      <li>{{ message }}</li>
+	    {% endfor %}
+	    </ul>
+	  {% endif %}
+	{% endwith %}
 </head>
 <body>
 	<div class="header_con">
 		<div class="header">
 			<div class="welcome fl">欢迎来到赛汉!</div>
 			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>张 山</em>
-				</div>
+				{% if not username %}
 				<div class="login_btn fl">
 					<a href="login">登录</a>
 					<span>|</span>
 					<a href="register">注册</a>
 				</div>
+				{% else %}
+				<div class="login_info fl">
+					欢迎您：<em>{{ username }}</em>
+				</div>
+				{% endif %}
 				<div class="user_link fl">
 					<span>|</span>
 					<a href="/user/info">用户中心</a>
