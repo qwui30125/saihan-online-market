@@ -2,34 +2,49 @@
 
 from . import app_seller
 from saihan import db
-from flask import render_template
+from flask import render_template,request
+from saihan.models import Product
 # from saihan.models import ...
+
 
 @app_seller.route("/items")
 def seller_items():
     dic1={
-        'name':'Casio/卡西欧 EX-TR350',
-        'price':5000,
+        'name':'Product.name',
+        'price':'Product.price',
         'heji':5000,
         'use':'删除',
-        'photo':"static/天天生鲜项目页面/images/adv01.jpg"
+        'photo':"ProductMedia.filename"
     }
     dic2={
-        'name':'Casio/卡西欧 EX-TR350',
-        'price':5000,
+        'name':'Product.name',
+        'price':'Product.price',
         'heji':5000,
         'use':'删除',
-        'photo':"static/天天生鲜项目页面/images/adv01.jpg"
+        'photo':"ProductMedia.filename"
     }
-    user = [dic1,dic2]
-    return render_template("seller_items.html",user=user)
+
+    users = [dic1,dic2]
+    return render_template("seller_items.html",users=users)
 
 
-@app_seller.route("/order")
+@app_seller.route("/order",methods=["GET","POST"])
 def seller_order():
-    return render_template("seller_order.html")
+    if request.method == "GET":
+        return render_template("seller_order.html")
+    else:
+        
 
 
-@app_seller.route("/release")
+@app_seller.route("/release", methods=["GET", "POST"])
 def seller_release():
-    return render_template("seller_release.html")
+    if request.method == "GET":
+        return render_template("seller_release.html")
+    else:
+        name = request.form.get('name')
+        description = request.form.get('description')
+        price = request.form.get('price')
+        picture = request.form.get('picture')
+        user = Product(name=name,description=description,price=price,attachments=picture)
+        db.session.add(user)
+    

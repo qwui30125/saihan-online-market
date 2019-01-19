@@ -1,0 +1,81 @@
+User  　　　　　　　　　　　　　　　   用户
+----------------------------------
+id　　　　　　　　　　　　　　　　　　　　  用户id
+type 　　　　　　　　　　　　　　　　   用户类型
+username　　　　　　　         用户名
+password_hash　　　        密码
+
+
+Profile　        　　　　　　　　个人资料
+----------------------------------
+id　　　　　　　　　　　　　　　　　　　　　 个人资料id
+user_id 　　　　　　　　　　　　　　　　用户id
+mobile 　　　　　　　　　　　　　　　　　手机号
+nickname　　　　            昵称
+avatar　　　　　　            用户头像路径
+info　　　　　　　　            个人简介
+addresses　　　　　          收货地址
+orders　　　　　　            订单
+
+
+Address          　　　　　　　地址
+----------------------------------
+id          　　　　　　　　　　　　主键
+user_id     　　　　　　　　　　　　用户id
+country     　　　　　　　　　　　　国家
+province    　　　　　　　　　　　　省
+city        　　　　　　　　　　　　城市
+street      　　　　　　　　　　　　街道
+name        　　　　　　　　　　　　联系人姓名
+phone       　　　　　　　　　　　　联系人电话
+
+
+Authenticate    实名认证信息
+----------------------------------
+id          　　　　主键
+user_id     　　　　用户id
+type        　　　　认证类型
+status　　　   　　　　认证状态
+
+
+AuthenticateDocuments  认证文件
+----------------------------------
+id               主键
+apply_id        　认证id
+filename         文件名
+
+
+Product         商品
+----------------------------------
+id　　　　　　　　　　　　  商品id
+seller_id       卖家id
+name            商品名称
+description　　   商品详细信息
+price　          商品价格
+attachments　    商品图片
+
+
+Order　　　        订单
+----------------------------------
+id              订单id
+product_id      商品id
+buyer_id        买家id
+status          状态
+comments       　备注
+
+
+Status          评价
+----------------------------------
+id              评价id
+source_id       评价人id
+target_id       被评价人id
+level           评价等级
+text            评价内容
+reply           回复内容
+
+
+ProductMedia   　商品图片
+----------------------------------
+id              商品图片id
+product_id      商品id
+filename        文件名

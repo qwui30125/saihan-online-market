@@ -73,12 +73,11 @@
 						
 						<th>操作</th>
 						</tr>
-						</thead>
 						<tbody>
-						{%for user in user%}
+						{%for user in users%}
 						<tr>
 						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
-						<td class="goods"><img src="static/天天生鲜项目页面/images/adv01.jpg" alt="" /><span>{{user['name']}}</span></td>
+						<td class="goods"><img src="{{user['photo']}}" alt="" /><span>{{user['name']}}</span></td>
 						<td class="price">{{ user['price']}}</td>
 						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
 						<td class="subtotal">{{user['heji']}}</td>

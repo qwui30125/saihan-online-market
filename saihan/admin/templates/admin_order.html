@@ -51,76 +51,106 @@
 		<div class="right_content clearfix">
 				<h3 class="common_title2">全部订单</h3>
 				<ul class="order_list_th w978 clearfix">
-					<li class="col01" style="width: 330px;">订单名称/编号</li>
+					<li class="col01" style="width: 330px;">商品名称/订单编号</li>
 					<li class="col01" style="width: 80px;">交易状态</li>
-					<li class="col01">订单金额</li>		
+					<li class="col01">购买用户</li>		
 				</ul>
 
 				<table class="order_list_table w980">
 					<tbody>
 						<tr>
 							<td width="55%">
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
-									<li class="col02">笔记本电脑五成新<em>SH201800001</em></li>	
-									<li class="col03">交易成功</li>
-									<li class="col04">980元</li>	
+								<ul class="order_goods_list clearfix">
+									<!-- 商品图片-->
+									<li class="col01"><img src="{{order_list[0]['pro_pic']}}"></li>
+									<!-- 商品名称和订单编号 -->
+									<li class="col02">{{order_list[0]["pro_name"]}}<em>{{order_list[0]["order_id"]}}</em></li>	
+									<!-- 订单状态 -->
+									<li class="col03">{{order_list[0]["order_statu"]}}</li>
+									<!-- 订单（商品价格） -->
+									<li class="col04">{{order_list[0]["order_price"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：正常</td>
-							<td width="15%">首页可见</td>
+							<!-- 订单购买者ｉｄ -->
+							<td width="15%">{{order_list[0]["buyer_id"]}}</td>
+							<!-- 订单卖家ｉｄ -->
+							<td width="15%">{{order_list[0]["seller_id"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
-									<li class="col02">《Python入门到精通》<em>SH201800002</em></li>	
-									<li class="col03">未成交</li>
-									<li class="col04">21.80元</li>	
+								<ul class="order_goods_list clearfix">
+									<!-- 商品图片-->				
+									<li class="col01"><img src="{{order_list[1]['pro_pic']}}"></li>
+									<!-- 商品名称和订单编号 -->
+									<li class="col02">{{order_list[1]["pro_name"]}}<em>{{order_list[1]["order_id"]}}</em></li>
+									<!-- 订单状态 -->	
+									<li class="col03">{{order_list[1]["order_statu"]}}</li>
+									<!-- 订单（商品价格） -->
+									<li class="col04">{{order_list[1]["order_price"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：正常</td>
-							<td width="15%">首页可见</td>
+							<!-- 订单购买者ｉｄ -->
+							<td width="15%">{{order_list[1]["buyer_id"]}}</td>
+							<!-- 订单卖家ｉｄ -->
+							<td width="15%">{{order_list[1]["seller_id"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
-									<li class="col02">飞利浦电动剃须刀<em>SH201800032</em></li>	
-									<li class="col03">订单过期</li>
-									<li class="col04">880元</li>	
+								<ul class="order_goods_list clearfix">
+									<!-- 商品图片-->					
+									<li class="col01"><img src="{{order_list[2]['pro_pic']}}"></li>
+									<!-- 商品名称和订单编号 -->
+									<li class="col02">{{order_list[2]["pro_name"]}}<em>{{order_list[2]["order_id"]}}</em></li>
+									<!-- 订单状态 -->	
+									<li class="col03">{{order_list[2]["buyer_id"]}}</li>
+									<!-- 订单（商品价格） -->
+									<li class="col04">{{order_list[2]["seller_id"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：异常</td>
-							<td width="15%">卖家可见</td>
+							<!-- 订单购买者ｉｄ -->
+							<td width="15%">{{order_list[2]["buyer_id"]}}</td>
+							<!-- 订单卖家ｉｄ -->
+							<td width="15%">{{order_list[2]["seller_id"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 						<tr>
 							<td>
-							    <ul class="order_goods_list clearfix">					
-								    <li class="col01"><img src="static/images/saihan.png"></li>
-								    <li class="col02">YSL唇膏<em>SH201800518</em></li>	
-								    <li class="col03">交易失败</li>
-								    <li class="col04">239元</li>	
+							    <ul class="order_goods_list clearfix">
+									<!-- 商品图片-->					
+									<li class="col01"><img src="{{order_list[3]['pro_pic']}}"></li>
+									<!-- 商品名称和订单编号 -->
+									<li class="col02">{{order_list[3]["pro_name"]}}<em>{{order_list[3]["order_id"]}}</em></li>
+									<!-- 订单状态 -->	
+									<li class="col03">{{order_list[3]["buyer_id"]}}</li>
+									<!-- 订单（商品价格） -->
+								    <li class="col04">{{order_list[3]["seller_id"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：异常</td>
-							<td width="15%">卖家可见</td>
+							<!-- 订单购买者ｉｄ -->
+							<td width="15%">{{order_list[3]["buyer_id"]}}</td>
+							<!-- 订单卖家ｉｄ -->
+							<td width="15%">{{order_list[3]["seller_id"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
-									<li class="col02">笔记本电脑五成新<em>SH201800001</em></li>	
-									<li class="col03">交易成功</li>
-									<li class="col04">980元</li>	
+								<ul class="order_goods_list clearfix">
+									<!-- 商品图片-->					
+									<li class="col01"><img src="{{order_list[4]['pro_pic']}}"></li>
+									<!-- 商品名称和订单编号 -->
+									<li class="col02">{{order_list[4]["pro_name"]}}<em>{{order_list[3]["order_id"]}}</em></li>	
+									<!-- 订单状态 -->
+									<li class="col03">{{order_list[3]["buyer_id"]}}</li>
+									<!-- 订单（商品价格） -->
+									<li class="col04">{{order_list[3]["seller_id"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：正常</td>
-							<td width="15%">首页可见</td>
+							<!-- 订单购买者ｉｄ -->
+							<td width="15%">{{order_list[3]["buyer_id"]}}</td>
+							<!-- 订单卖家ｉｄ -->
+							<td width="15%">{{order_list[3]["seller_id"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 					</tbody>
@@ -150,7 +180,7 @@
 			<span>|</span>
 			<a href="#">友情链接</a>		
 		</div>
-		<p>CopyRight © 2018 赛汉（天津）信息技术有限公司 All Rights Reserved</p>
+		<p>CopyRight © 2018 天津赛汉科技有限公司 All Rights Reserved</p>
 		<p>电话：022-****888    津ICP备*******8号</p>
 	</div>
 	

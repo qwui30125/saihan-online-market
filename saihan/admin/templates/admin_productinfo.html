@@ -51,8 +51,8 @@
 		<div class="right_content clearfix">
 				<h3 class="common_title2">全部商品</h3>
 				<ul class="order_list_th w978 clearfix">
-					<li class="col01" style="width: 330px;">商品名称／编号</li>
-					<li class="col01" style="width: 80px;">商品状态</li>
+					<li class="col01" style="width: 330px;">商品名称</li>
+					<li class="col01" style="width: 80px;">卖家信息</li>
 					<li class="col01">商品金额</li>		
 				</ul>
 
@@ -61,66 +61,66 @@
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
-									<li class="col02">CONVERSE经典黑色高帮<em>服饰鞋包</em></li>	
-									<li class="col03">已成交</li>
-									<li class="col04">369元</li>	
+									<li class="col01"><img src="{{pro_list[0]['pro_pic']}}"></li>
+									<li class="col02">{{pro_list[0]['pro_name']}}</li>	
+									<li class="col03">{{pro_list[0]['seller_name']}}</li>
+									<li class="col04">{{pro_list[0]['price']}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：正常</td>
-							<td width="15%">首页可见</td>
+							<td width="15%">商品状态：{{pro_list[0]['status']}}</td>
+							<td width="15%">商品编号：{{pro_list[0]['id']}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 						<tr>
 							<td>
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
-									<li class="col02">Haier摩卡32寸电视<em>数码家电</em></li>	
-									<li class="col03">未成交</li>
-									<li class="col04">1150元</li>	
+									<li class="col01"><img src="{{pro_list[1]['pro_pic']}}"></li>
+									<li class="col02">{{pro_list[1]['pro_name']}}</li>	
+									<li class="col03">{{pro_list[1]['seller_name']}}</li>
+									<li class="col04">{{pro_list[1]['price']}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：正常</td>
-							<td width="15%">首页可见</td>
+							<td width="15%">商品状态：{{pro_list[1]['status']}}</td>
+							<td width="15%">商品编号：{{pro_list[1]['id']}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
-									<li class="col02">某音爆款零食礼盒<em>食品生鲜</em></li>	
-									<li class="col03">商品过期</li>
-									<li class="col04">99.9元</li>	
+									<li class="col01"><img src="{{pro_list[2]['pro_pic']}}"></li>
+									<li class="col02">{{pro_list[2]['pro_name']}}</li>	
+									<li class="col03">{{pro_list[2]['seller_name']}}</li>
+									<li class="col04">{{pro_list[2]['price']}}</li>	
 								</ul>
 							</td>
-							<td width="15%">状态：正常</td>
-						    <td width="15%">卖家可见</td>
+							<td width="15%">商品状态：{{pro_list[2]['status']}}</td>
+						    <td width="15%">商品编号：{{pro_list[2]['id']}}</td>
 						    <td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 						</tr>
 						<tr>
 							<td>
 						        <ul class="order_goods_list clearfix">					
-								    <li class="col01"><img src="static/images/saihan.png"></li>
-								    <li class="col02">IKEA折叠椅<em>家居家具</em></li>	
-								    <li class="col03">信息违规</li>
-								    <li class="col04">38.8元</li>	
+								    <li class="col01"><img src="{{pro_list[3]['pro_pic']}}"></li>
+								    <li class="col02">{{pro_list[3]['pro_name']}}</li>	
+								    <li class="col03">{{pro_list[3]['seller_name']}}</li>
+								    <li class="col04">{{pro_list[3]['price']}}</li>	
 							    </ul>
 						    </td>
-						    <td width="15%">状态：正常</td>
-						    <td width="15%">卖家可见</td>
+						    <td width="15%">商品状态：{{pro_list[3]['status']}}</td>
+						    <td width="15%">商品编号：{{pro_list[3]['id']}}</td>
 						    <td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 					</tr>
 					<tr>
 						<td width="55%">
 							<ul class="order_goods_list clearfix">					
-								<li class="col01"><img src="static/images/saihan.png"></li>
-								<li class="col02">CONVERSE经典黑色高帮<em>服饰鞋包</em></li>	
-								<li class="col03">已成交</li>
-								<li class="col04">369元</li>	
+								<li class="col01"><img src="{{pro_list[4]['pro_pic']}}"></li>
+								<li class="col02">{{pro_list[4]['pro_name']}}</li>	
+								<li class="col03">{{pro_list[4]['seller_name']}}</li>
+								<li class="col04">{{pro_list[4]['price']}}</li>	
 							</ul>
 						</td>
-						<td width="15%">状态：正常</td>
-						<td width="15%">首页可见</td>
+						<td width="15%">商品状态：{{pro_list[4]['status']}}</td>
+						<td width="15%">商品编号：{{pro_list[4]['id']}}</td>
 						<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
 					</tr>
 				</tbody>
@@ -149,7 +149,7 @@
 			<span>|</span>
 			<a href="#">友情链接</a>		
 		</div>
-		<p>CopyRight © 2018 赛汉（天津）信息技术有限公司 All Rights Reserved</p>
+		<p>CopyRight © 2018 天津赛汉科技有限公司 All Rights Reserved</p>
 		<p>电话：022-****888    津ICP备*******8号</p>
 	</div>
 	
