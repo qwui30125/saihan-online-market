@@ -123,6 +123,12 @@ class Product(BaseModel, db.Model):
     name = db.Column(db.String(32), nullable=False)
     description = db.Column(db.Text())
     price = db.Column(db.Integer, nullable=False)
+    status = db.Column(
+        db.Enum(
+            "SELLING", # 出售中
+            "SELLED" # 已出售
+        ),
+        default="SELLING")
     attachments = db.relationship("ProductMedia", backref="product")
 
 

@@ -2,9 +2,14 @@
 
 from . import app_common
 from saihan import db
-from flask import render_template, request, session
+from flask import render_template, request, session, redirect
 from saihan.models import User
 # from saihan.models import ...
+
+@app_common.route("/index")
+def index():
+    return render_template("index.html")
+
 
 @app_common.route("/register", methods=["POST", "GET"])
 def register():
@@ -117,7 +122,7 @@ def login():
     session["username"] = user.username
     session["user_id"] = user.id
 
-    return "登录成功"
+    return redirect(url_for("index"))
 
 @app_common.route("/session", methods=["GET"])
 def check_login():

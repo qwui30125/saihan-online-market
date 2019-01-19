@@ -1,8 +1,0 @@
-数据库创建：
-1.执行:
-    mysql -uroot -p < create_saihan.sql
-    输入密码
-2.执行:
-    python manage.py db migrate
-    python manage.py db upgrade
-3.插入数据
