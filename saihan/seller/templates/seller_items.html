@@ -3,10 +3,10 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>赛汉-专注二手商品</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="shortcut icon" href="123.jpg" type="image/x-icon">
-	<script type="text/javascript" src="js/seller_items.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="shortcut icon" href="static/天天生鲜项目界面/123.jpg" type="image/x-icon">
+	<script type="text/javascript" src="static/js/seller_items.js"></script>
 </head>
 <body>
 	<div class="header_con">
@@ -46,9 +46,9 @@
 		<div class="left_menu_con clearfix">
 			<h3>商家中心</h3>
 			<ul>
-				<li><a href="seller_items.html" class="active">· 管理商品</a></li>
-				<li><a href="seller_release.html">· 发布商品</a></li>
-				<li><a href="seller_order.html">· 管理订单</a></li>
+				<li><a href="items" class="active">· 管理商品</a></li>
+				<li><a href="release">· 发布商品</a></li>
+				<li><a href="order">· 管理订单</a></li>
 			</ul>
 		</div>
 		<div class="right_content clearfix">
@@ -75,37 +75,39 @@
 						</tr>
 						</thead>
 						<tbody>
+						{%for user in user%}
 						<tr>
 						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
-						<td class="goods"><img src="images/1.jpg" alt="" /><span>Casio/卡西欧 EX-TR350</span></td>
-						<td class="price">5999.88</td>
+						<td class="goods"><img src="static/天天生鲜项目页面/images/adv01.jpg" alt="" /><span>{{user['name']}}</span></td>
+						<td class="price">{{ user['price']}}</td>
 						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
-						<td class="subtotal">5999.88</td>
+						<td class="subtotal">{{user['heji']}}</td>
+						<td class="operation"><span class="delete">{{user['use']}}</span></td>
+						</tr>
+						{% endfor %}
+						<!-- <tr>
+						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
+						<td class="goods"><img src="static/天天生鲜项目界面/images/2.jpg" alt="" /><span>Canon/佳能 PowerShot SX50 HS</span></td>
+						<td class="price">3888.50</td> -->
+						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
+						<!-- <td class="subtotal">3888.50</td>
 						<td class="operation"><span class="delete">删除</span></td>
 						</tr>
 						<tr>
 						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
-						<td class="goods"><img src="images/2.jpg" alt="" /><span>Canon/佳能 PowerShot SX50 HS</span></td>
-						<td class="price">3888.50</td>
+						<td class="goods"><img src="static/天天生鲜项目界面/images/3.jpg" alt="" /><span>Sony/索尼 DSC-WX300</span></td>
+						<td class="price">1428.50</td> -->
 						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
-						<td class="subtotal">3888.50</td>
+						<!-- <td class="subtotal">1428.50</td>
 						<td class="operation"><span class="delete">删除</span></td>
 						</tr>
 						<tr>
 						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
-						<td class="goods"><img src="images/3.jpg" alt="" /><span>Sony/索尼 DSC-WX300</span></td>
-						<td class="price">1428.50</td>
+						<td class="goods"><img src="static/天天生鲜项目界面/images/4.jpg" alt="" /><span>Fujifilm/富士 instax mini 25</span></td>
+						<td class="price">640.60</td> -->
 						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
-						<td class="subtotal">1428.50</td>
-						<td class="operation"><span class="delete">删除</span></td>
-						</tr>
-						<tr>
-						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
-						<td class="goods"><img src="images/4.jpg" alt="" /><span>Fujifilm/富士 instax mini 25</span></td>
-						<td class="price">640.60</td>
-						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
-						<td class="subtotal">640.60</td>
-						<td class="operation"><span class="delete">删除</span></td>
+						<!-- <td class="subtotal">640.60</td>
+						<td class="operation"><span class="delete">删除</span></td> -->
 						</tr>
 						</tbody>
 					   </table>

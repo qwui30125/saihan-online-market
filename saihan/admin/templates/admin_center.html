@@ -3,8 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>用户管理中心</title>
-	<link rel="stylesheet" type="text/css" href="reset.css">
-	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 </head>
 <body>
 	<div class="header_con">
@@ -29,7 +29,7 @@
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl" id="shLogo"><img src="saihan1.png"></a>
+		<a href="index.html" class="logo fl" id="shLogo"><img src="static/images/saihan1.png"></a>
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;综合管理</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="查找信息">
@@ -42,9 +42,9 @@
 			<h3>管理中心</h3>
 			<ul>
 				<li><a href="#" class="active">· 已注册用户管理</a></li>
-				<li><a href="admin_order.html" >· 全部订单管理</a></li>
-				<li><a href="admin_adver.html">· 广告信息管理</a></li>
-				<li><a href="admin_productinfo.html">· 商品信息管理</a></li>
+				<li><a href="/admin/admin_order" >· 全部订单管理</a></li>
+				<li><a href="/admin/admin_adver">· 广告信息管理</a></li>
+				<li><a href="/admin/admin_productinfo">· 商品信息管理</a></li>
 				
 			</ul>
 		</div>
@@ -62,67 +62,67 @@
 					<tbody>
 						<tr>
 							<td width="55%">
-								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="saihan.png"></li>
-									<li class="col02">是惠民啦～</li>	
-									<li class="col03">买家</li>
-									<li class="col04">已实名</li>	
+								<ul class="order_goods_list clearfix">			
+									<li class="col01"><img src="{{u_list[0]['user_pic']}}"></li>
+									<li class="col02">{{u_list[0]["user_name"]}}</li>	
+									<li class="col03">{{u_list[0]["user_type"]}}</li>
+									<li class="col04">{{u_list[0]["check"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">2018-1-1</td>
-							<td width="15%">2019-1-15</td>
+							<td width="15%">{{u_list[0]["regs_time"]}}</td>
+							<td width="15%">{{u_list[0]["last_time"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看信息</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="saihan.png"></li>
-									<li class="col02">是惠民啦～</li>	
-									<li class="col03">买家</li>
-									<li class="col04">已实名</li>	
+									<li class="col01"><img src="{{u_list[1]['user_pic']}}"></li>
+									<li class="col02">{{u_list[1]["user_name"]}}</li>	
+									<li class="col03">{{u_list[1]["user_type"]}}</li>
+									<li class="col04">{{u_list[1]["check"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">2018-1-1</td>
-							<td width="15%">2019-1-15</td>
+							<td width="15%">{{u_list[1]["regs_time"]}}</td>
+							<td width="15%">{{u_list[1]["last_time"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看信息</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="saihan.png"></li>
-									<li class="col02">是惠民啦～</li>	
-									<li class="col03">买家</li>
-									<li class="col04">已实名</li>	
+									<li class="col01"><img src="{{u_list[2]['user_pic']}}"></li>
+									<li class="col02">{{u_list[2]["user_name"]}}</li>	
+									<li class="col03">{{u_list[2]["user_type"]}}</li>
+									<li class="col04">{{u_list[2]["check"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">2018-1-1</td>
-							<td width="15%">2019-1-15</td>
+							<td width="15%">{{u_list[2]["regs_time"]}}</td>
+							<td width="15%">{{u_list[2]["last_time"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看信息</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="saihan.png"></li>
-									<li class="col02">是惠民啦～</li>	
-									<li class="col03">买家</li>
-									<li class="col04">已实名</li>	
+									<li class="col01"><img src="{{u_list[3]['user_pic']}}"></li>
+									<li class="col02">{{u_list[3]["user_name"]}}</li>	
+									<li class="col03">{{u_list[3]["user_type"]}}</li>
+									<li class="col04">{{u_list[3]["check"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">2018-1-1</td>
-							<td width="15%">2019-1-15</td>
+							<td width="15%">{{u_list[3]["regs_time"]}}</td>
+							<td width="15%">{{u_list[3]["last_time"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看信息</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="saihan.png"></li>
-									<li class="col02">是惠民啦～</li>	
-									<li class="col03">买家</li>
-									<li class="col04">已实名</li>	
+									<li class="col01"><img src="{{u_list[4]['user_pic']}}"></li>
+									<li class="col02">{{u_list[4]["user_name"]}}</li>	
+									<li class="col03">{{u_list[4]["user_type"]}}</li>
+									<li class="col04">{{u_list[4]["check"]}}</li>	
 								</ul>
 							</td>
-							<td width="15%">2018-1-1</td>
-							<td width="15%">2019-1-15</td>
+							<td width="15%">{{u_list[4]["regs_time"]}}</td>
+							<td width="15%">{{u_list[4]["last_time"]}}</td>
 							<td width="15%"><a href="#" class="oper_btn">查看信息</a></td>
 						</tr>
 					</tbody>

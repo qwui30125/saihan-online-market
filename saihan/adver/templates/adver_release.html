@@ -3,8 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>赛汉-用户商中心</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
 </head>
 <body>
 	<div class="header_con">
@@ -12,7 +12,7 @@
 			<div class="welcome fl">欢迎来到赛汉广告商主题!</div>
 			<div class="fr">
 				<div class="login_info fl">
-					欢迎您：<em>张 山</em>
+					欢迎您：<em>{{d1['name']}}</em>
 				</div>
 				<div class="login_btn fl">
 					<a href="login.html">登录</a>
@@ -32,7 +32,7 @@
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="images/saihan.png"></a>
+		<a href="index.html" class="logo fl"><img src="static/images/saihan.png"></a>
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;广告商中心</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="搜索广告类型">
@@ -44,7 +44,7 @@
 		<div class="left_menu_con clearfix">
 			<h3>用户中心</h3>
 			<ul>
-				<li><a href="adver_manage.html">· 已有广告</a></li>
+				<li><a href="/adver/adver_manage">· 已有广告</a></li>
                 <li><a href="adver_release.html" class="active">· 发布新广告</a></li>
 			</ul>
 		</div>
@@ -129,7 +129,9 @@
 							<span class="error_tip">提示信息</span> -->
 						</li>
 						<li class="reg_sub">
-							<input type="submit" value="提 交" name="">
+							<a href="">
+								<input type="submit" value="提 交" name="">
+							</a>
 						</li>
 					</ul>				
 					</form>

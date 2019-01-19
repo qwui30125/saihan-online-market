@@ -7,7 +7,22 @@ from flask import render_template
 
 @app_seller.route("/items")
 def seller_items():
-    return render_template("seller_items.html")
+    dic1={
+        'name':'Casio/卡西欧 EX-TR350',
+        'price':5000,
+        'heji':5000,
+        'use':'删除',
+        'photo':"static/天天生鲜项目页面/images/adv01.jpg"
+    }
+    dic2={
+        'name':'Casio/卡西欧 EX-TR350',
+        'price':5000,
+        'heji':5000,
+        'use':'删除',
+        'photo':"static/天天生鲜项目页面/images/adv01.jpg"
+    }
+    user = [dic1,dic2]
+    return render_template("seller_items.html",user=user)
 
 
 @app_seller.route("/order")
