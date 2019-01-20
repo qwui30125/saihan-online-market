@@ -74,7 +74,7 @@ def place_order(places=None):
 def detail(product_id=None):
     product_id = product_id
     product = models.Product.query.filter_by(id=product_id).first()
-
+    print(product.name, product.price)
     return render_template("detail.html", product=product)
 
 # 个人简介
