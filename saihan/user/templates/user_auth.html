@@ -1,0 +1,93 @@
+{% extends "userlayout.html" %}
+{% block body %}
+<body>
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到赛汉!</div>
+			<div class="fr">
+				<div class="login_info fl">
+					欢迎您：<em>张 山</em>
+				</div>
+				<div class="login_btn fl">
+					<a href="{{url_for('common.login')}}">登录</a>
+					<span>|</span>
+					<a href="{{url_for('common.register')}}">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{{url_for('user.user_info')}}">用户中心</a>
+					<span>|</span>
+					<a href="{{url_for('user.user_cart')}}">我的购物车</a>
+					<span>|</span>
+					<a href="{{url_for('user.user_order')}}">我的订单</a>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<div class="search_bar clearfix">
+		<a href="{{url_for('common.index')}}" class="logo fl"><img src="{{ url_for('static', filename='images/logo/saihan.png') }}" style="width: 100%; height:100%"
+		></a>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
+		<div class="search_con fr">
+			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
+			<input type="button" class="input_btn fr" name="" value="搜索">
+		</div>		
+	</div>
+
+	<div class="main_con clearfix">
+		<div class="left_menu_con clearfix">
+			<h3>用户中心</h3>
+			<ul>
+				<li><a href="{{url_for('user.user_info')}}">· 个人信息</a></li>
+				<li><a href="{{url_for('user.user_order')}}">· 全部订单</a></li>
+				<li><a href="{{url_for('user.user_site')}}">· 收货地址</a></li>
+				<li><a href="{{url_for('user.user_auth')}}" class="active">· 实名认证</a></li>
+			</ul>
+		</div>
+
+		<div class="right_content clearfix">			
+			<h3 class="common_title2">实名认证</h3>
+			<div class="has_view_list">
+				<div class="reg_form clearfix">
+					<form>
+						<ul>
+							<li>
+								<label>证件号:</label>
+								<input type="text" name="cpwd" id="cpwd">
+								<span class="error_tip">提示信息</span>
+							</li>
+							<li>
+								<label>证件照片:</label>
+								<input type="file" name="filename" style="border: none;background-color: white;margin-top: 8px;">
+								<!-- <input type="text" name="email" id="email">
+								<span class="error_tip">提示信息</span> -->
+							</li>
+							<li class="reg_sub">
+								<input type="submit" value="提 交" name="">
+							</li>
+						</ul>				
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="footer">
+		<div class="foot_link">
+			<a href="#">关于我们</a>
+			<span>|</span>
+			<a href="#">联系我们</a>
+			<span>|</span>
+			<a href="#">招聘人才</a>
+			<span>|</span>
+			<a href="#">友情链接</a>		
+		</div>
+		<p>CopyRight © 2016 天津赛汉科技有限公司 All Rights Reserved</p>
+		<p>电话：010-****888    京ICP备*******8号</p>
+	</div>
+	
+</body>
+{% endblock %}

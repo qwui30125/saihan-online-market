@@ -1,49 +1,30 @@
-<!doctype html>
-<html lang="en">
- <head>
-  <meta charset="UTF-8">
-  <meta name="Generator" content="EditPlus®">
-  <meta name="Author" content="">
-  <meta name="Keywords" content="">
-  <meta name="Description" content="">
-  <title>Document</title>
-  <link rel="stylesheet" href="static/css/cart.css" type="text/css">
-  <script src="static/js/jquery-1.11.3.js"></script>
-  <script src="static/js/cart.js"></script>
- </head>
+{% extends "userlayout.html" %}
+{% block body %}
  <body>
-	<div id="container">
-		<!-- 1. 导航 -->
-		<div id="nav">
-			<!-- 1.1 右侧导航 -->
-			<ul class="rightNav">
-				<li>
-					<a href="">[ 登录 ]</a>
-					<a href="">[ 注册有惊喜 ]</a>
-				</li>
-				<li>
-					<a href="">赛汉公告</a>
-				</li>
-				<li>
-					<a href="">券卡兑换</a>
-				</li>
-				<li class="lastItem">
-					<a href="">返回首页</a>
-				</li>
-			</ul>
-			<!-- 1.2 左侧导航 -->
-			<ol class="leftNav">
-				<li>
-					<span>上海</span>
-					<i></i>
-				</li>
-				<li>满百包邮(环郊内)</li>
-				<li>
-					<a href="">星夜达</a>
-				</li>
-			</ol>
-			
-		</div>
+	<!-- 1. 导航 -->
+	<div class="header_con">
+		<div class="header">
+			<div class="welcome fl">欢迎来到赛汉!</div>
+			<div class="fr">
+				<div class="login_info fl">
+					欢迎您：<em>张 山</em>
+				</div>
+				<div class="login_btn fl">
+					<a href="{{url_for('common.login')}}">登录</a>
+					<span>|</span>
+					<a href="{{url_for('common.register')}}">注册</a>
+				</div>
+				<div class="user_link fl">
+					<span>|</span>
+					<a href="{{url_for('user.user_info')}}">用户中心</a>
+					<span>|</span>
+					<a href="{{url_for('user.user_cart')}}">我的购物车</a>
+					<span>|</span>
+					<a href="{{url_for('user.user_order')}}">我的订单</a>
+				</div>
+			</div>
+		</div>		
+	</div>
 		<!-- 2. 横幅banner -->
 		<!-- <div id="banner">
 			<img src="static/images/images1/banner1.jpg">
@@ -65,6 +46,7 @@
 			</a>
 		</div> -->
 		<!-- 4. 主体 -->
+	<div id="container">
 		<div id="main">
 			<!-- 上方标题栏(工具栏)-->
 			<div class="title">
@@ -172,4 +154,4 @@
 	
 	</div>
  </body>
-</html>
+{% endblock %}

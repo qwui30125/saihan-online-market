@@ -1,11 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>赛汉-广告商中心</title>
-	<link rel="stylesheet" type="text/css" href="static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="static/css/main.css">
-</head>
+{% extends "adverlayout.html" %}
+{% block body %}
 <body>
 	<div class="header_con">
 		<div class="header">
@@ -15,23 +9,22 @@
 					欢迎您：<em>{{ name }}</em>
 				</div>
 				<div class="login_btn fl">
-					<a href="login.html">登录</a>
+					<a href="{{url_for('common.login')}}">登录</a>
 					<span>|</span>
-					<a href="register.html">注册</a>
+					<a href="{{url_for('common.register')}}">注册</a>
 				</div>
 				<div class="user_link fl">
 					<span>|</span>
-					<a href="user_center_info.html">广告商中心</a>
+					<a href="{{url_for('adver.adver_manage')}}">广告商中心</a>
 					<span>|</span>
-					<a href="index.html">返回首页</a>
+					<a href="{{url_for('adver.adver_release')}}">发布新广告</a>
 				</div>
 			</div>
 		</div>		
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="static/images/
-		saihan.png"></a>
+		<a href="{{ url_for('common.index') }}" class="logo fl"><img src="{{url_for('static', filename='images/logo/saihan.png')}}" style="width:100%;height:100%"></a>
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;广告商中心</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="搜索广告类型">
@@ -43,8 +36,8 @@
 		<div class="left_menu_con clearfix">
 			<h3>广告中心</h3>
 			<ul>
-				<li><a href="adver_manage.html" class="active">· 已有广告</a></li>
-                <li><a href="/adver/adver_release">· 发布新广告</a></li>
+				<li><a href="{{url_for('adver.adver_manage')}}" class="active">· 管理已有广告</a></li>
+                <li><a href="{{url_for('adver.adver_release')}}">· 发布新广告</a></li>
 			</ul>
 		</div>
 		<div class="right_content clearfix">
@@ -111,4 +104,4 @@
 	</div>
 	
 </body>
-</html>
+{% endblock %}

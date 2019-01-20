@@ -1,14 +1,19 @@
 # coding:utf-8
 
 from . import app_common
-from saihan import db
-from flask import render_template, request, session, redirect
+from saihan import db, login_manager
+from flask import render_template, request, session, redirect, url_for
 from saihan.models import User
+from flask_login import login_user, current_user, login_required, logout_user
 # from saihan.models import ...
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.filter_by(id=user_id).first()
 
 @app_common.route("/index")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", user=current_user)
 
 
 @app_common.route("/register", methods=["POST", "GET"])
@@ -35,11 +40,11 @@ def register():
 
     # 校验参数
     if not all([username, password, password2, email]):
-        return "<h1>参数不完整</h1>"
+        return render_template("error.html", error="参数不完整")
 
 
     if password != password2:
-        return "<h1>两次密码不一致</h1>"
+        return render_template("error.html", error="两次密码不一致")
 
 
     # 判断用户是否注册过
@@ -47,11 +52,11 @@ def register():
         user = User.query.filter_by(username=username).first()
     except Exception as e:
         raise
-        return "数据库异常"
+        return render_template("error.html", error="数据库异常")
     else:
         if user is not None:
             # 表示手机号已存在
-            return "用户已存在"
+            return render_template("error.html", error="用户已存在")
 
     # 盐值   salt
 
@@ -72,19 +77,14 @@ def register():
         # 数据库操作错误后的回滚
         db.session.rollback()
         raise
-        return "用户已存在"
+        return render_template("error.html", error="用户已存在")
     except Exception as e:
         db.session.rollback()
         raise
-        return "查询数据库异常"
-
-    # # 保存登录状态到session中
-    session["username"] = user.username
-    session["user_id"] = user.id
-
+        return render_template("error.html", error="查询数据库异常")
     # # 返回结果
     # return jsonify(errno=RET.OK, errmsg="注册成功")
-    return "注册成功"
+    return render_template("error.html", error="注册成功")
 
 
 @app_common.route("/login", methods=["GET", "POST"])
@@ -105,40 +105,34 @@ def login():
     # 校验参数
     # 参数完整的校验
     if not all([username, password]):
-        return "参数不完整"
+        return render_template("error.html", error="参数不完整")
 
     # 从数据库中根据手机号查询用户的数据对象
     try:
         user = User.query.filter_by(username=username).first()
     except Exception as e:
         raise
-        return "获取用户信息失败"
+        return render_template("error.html", error="获取用户信息失败")
 
     # 用数据库的密码与用户填写的密码进行对比验证
     if user is None or not user.check_password(password):
-        return "用户名或密码错误"
+        return render_template("error.html", error="用户名或密码错误")
 
+    login_user(user)
+    # print(user)
     # 如果验证相同成功，保存登录状态， 在session中
-    session["username"] = user.username
-    session["user_id"] = user.id
+    # return render_template("error.html", error=user.type)
+    if user.type == "PERSONAL":
+        return redirect(url_for("common.index"))
+    elif user.type == "BUSINESS":
+        return redirect(url_for("seller.seller_items"))
+    elif user.type == "ADVERTISEMENT":
+        return redirect(url_for("adver.adver_manage"))
+    elif user.type == "ADMINISTRATOR":
+        return redirect(url_for("admin.admin_userinfo"))
 
-    return redirect(url_for("index"))
-
-@app_common.route("/session", methods=["GET"])
-def check_login():
-    """检查登陆状态"""
-    # 尝试从session中获取用户的名字
-    username = session.get("username")
-    # 如果session中数据name名字存在，则表示用户已登录，否则未登录
-    if username is not None:
-        return "已登录"
-    else:
-        return "未登录"
-
-
-@app_common.route("/session", methods=["DELETE"])
+@app_common.route("/logout")
+@login_required
 def logout():
-    """登出"""
-    # 清除session数据
-    session.clear()
-    return "已登出"
+    logout_user()
+    return redirect(url_for("common.index"))

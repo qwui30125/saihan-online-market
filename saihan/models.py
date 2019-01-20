@@ -3,6 +3,7 @@
 import datetime
 import werkzeug.security
 from saihan import db
+from flask_login import UserMixin
 
 
 class BaseModel(object):
@@ -12,7 +13,7 @@ class BaseModel(object):
     update_time = db.Column(db.DateTime, default=datetime.datetime.now, onupdate=datetime.datetime.now)  # 记录的更新时间
 
 
-class User(BaseModel, db.Model):
+class User(BaseModel, db.Model, UserMixin):
     """用户"""
     __tablename__ = "user"
 
