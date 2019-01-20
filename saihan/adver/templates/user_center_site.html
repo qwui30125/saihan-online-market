@@ -3,8 +3,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<title>赛汉购物-用户中心</title>
-	<link rel="stylesheet" type="text/css" href="css/reset.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/adver_reset.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/adver_main.css') }}">
 </head>
 <body>
 	<div class="header_con">
@@ -32,7 +32,7 @@
 	</div>
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="images/saihan.png"></a>
+		<a href="index.html" class="logo fl"><img src="{{ url_for('static', filename='images/saihan.png') }}"></a>
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;用户中心</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
@@ -95,7 +95,7 @@
 			<span>|</span>
 			<a href="#">友情链接</a>		
 		</div>
-		<p>CopyRight © 2016 天津赛汉科技有限公司 All Rights Reserved</p>
+		<p>CopyRight © 2018 天津赛汉科技有限公司 All Rights Reserved</p>
 		<p>电话：010-****888    京ICP备*******8号</p>
 	</div>
 	
