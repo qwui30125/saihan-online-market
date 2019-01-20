@@ -3,6 +3,7 @@
 from . import app_adver
 from saihan import db
 from flask import render_template
+import saihan.models as models
 # from saihan.models import ..
 
 # 广告界面
@@ -50,12 +51,12 @@ def adver_cart():
 
     # 支付界面
 @app_adver.route("/place_order")
-def place_order():
+def place_order(places=None):
     place1 = {
     'img_url':'p11.jpg',
     'danwei':'一块',
     'xinxi':'卡西欧',
-    'jine':3000
+    'jine':8000
     }
     place2 ={
     'img_url':'p15.jpg',
@@ -63,12 +64,35 @@ def place_order():
     'xinxi':'劳斯莱斯',
     'jine':500000
     }
-    places = [place1, place2]
+    if not places:
+        places = [place1, place2]
     return render_template("place_order.html",place=places)
 
 
 # 商品详细信息
-@app_adver.route('/detail')
-def detail():
-    return render_template("detail.html")
+@app_adver.route('/detail/<int:product_id>')
+def detail(product_id=None):
+    product_id = product_id
+    product = models.Product.query.filter_by(id=product_id).first()
 
+    return render_template("detail.html", product=product)
+
+# 个人简介
+@app_adver.route('/user_center_info',defaults={'user_id':None})
+@app_adver.route('/user_center_info/<int:user_id>')
+def user_center_info(user_id=None):
+    user_id = user_id
+    profile = models.Profile.query.filter_by(user_id=user_id).first()
+    return render_template("user_center_info.html",profile=profile)
+
+
+# 我的订单
+@app_adver.route('/user_center_order')
+def user_center_order():
+    return render_template("user_center_order.html")
+
+
+# 收货地址
+@app_adver.route('/user_center_site')
+def user_center_site():
+    return render_template("user_center_site.html")
