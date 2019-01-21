@@ -3,13 +3,17 @@
 from . import app_common
 from saihan import db, login_manager
 from flask import render_template, request, session, redirect, url_for
-from saihan.models import User
+from saihan.models import User, Profile
 from flask_login import login_user, current_user, login_required, logout_user
 # from saihan.models import ...
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.filter_by(id=user_id).first()
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    return render_template("error.html", error="未登录")
 
 @app_common.route("/index")
 def index():
@@ -29,23 +33,22 @@ def register():
 
     # 如果是POST方法,则获取请求的表单数据，返回字典
     req_dict = request.form.to_dict()
-    print(dir(req_dict))
+    # print(dir(req_dict))
 
     username = req_dict.get("username")
     password = req_dict.get("pwd")
     password2 = req_dict.get("cpwd")
-    email = req_dict.get("email")
-    print(username)
-    print(password)
+    mobile = req_dict.get("mobile")
+    # print(username)
+    # print(password)
 
     # 校验参数
-    if not all([username, password, password2, email]):
+    if not all([username, password, password2, mobile]):
         return render_template("error.html", error="参数不完整")
 
-
+    # 密码验证
     if password != password2:
         return render_template("error.html", error="两次密码不一致")
-
 
     # 判断用户是否注册过
     try:
@@ -55,16 +58,8 @@ def register():
         return render_template("error.html", error="数据库异常")
     else:
         if user is not None:
-            # 表示手机号已存在
+            # 表示用户已存在
             return render_template("error.html", error="用户已存在")
-
-    # 盐值   salt
-
-    #  注册
-    #  用户1   password="123456" + "abc"   sha1   abc$hxosifodfdoshfosdhfso
-    #  用户2   password="123456" + "def"   sha1   def$dfhsoicoshdoshfosidfs
-    #
-    # 用户登录  password ="123456"  "abc"  sha256      sha1   hxosufodsofdihsofho
 
     # 保存用户的注册数据到数据库中
     user = User(username=username, type="PERSONAL")
@@ -84,6 +79,9 @@ def register():
         return render_template("error.html", error="查询数据库异常")
     # # 返回结果
     # return jsonify(errno=RET.OK, errmsg="注册成功")
+    # 注册成功自动生成个人资料
+    profile = Profile(user_id=user.id, mobile=mobile, nickname=username, avatar="saihan.png")
+
     return render_template("error.html", error="注册成功")
 
 
@@ -98,7 +96,7 @@ def login():
         return render_template("login.html")
     # 获取参数
     req_dict = request.form.to_dict()
-    print(req_dict)
+    # print(req_dict)
     username = req_dict.get("username")
     password = req_dict.get("pwd")
 

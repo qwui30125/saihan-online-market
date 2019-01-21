@@ -4,6 +4,7 @@ $(function(){
 	var error_password = false;
 	var error_check_password = false;
 	var error_email = false;
+	var error_mobile = false;
 	var error_check = false;
 
 
@@ -21,6 +22,10 @@ $(function(){
 
 	$('#email').blur(function() {
 		check_email();
+	});
+
+	$('#mobile').blur(function() {
+		check_mobile();
 	});
 
 	$('#allow').click(function() {
@@ -101,7 +106,22 @@ $(function(){
 			$('#email').next().show();
 			error_check_password = true;
 		}
+	}
 
+	function check_mobile(){
+		var re = /^[0-9]{11}$/;
+
+		if(re.test($('#mobile').val()))
+		{
+			$('#mobile').next().hide();
+			error_mobile = false;
+		}
+		else
+		{
+			$('#mobile').next().html('你输入的手机号格式不正确')
+			$('#mobile').next().show();
+			error_check_password = true;
+		}
 	}
 
 
@@ -110,6 +130,7 @@ $(function(){
 		check_pwd();
 		check_cpwd();
 		check_email();
+		check_mobile();
 
 		if(error_name == false && error_password == false && error_check_password == false && error_email == false && error_check == false)
 		{

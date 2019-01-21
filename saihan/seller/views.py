@@ -2,30 +2,20 @@
 
 from . import app_seller
 from saihan import db
-from flask import render_template,request
-from saihan.models import Product
+from flask import render_template,request, url_for
+from saihan.models import Product, Profile
+from flask_login import current_user, login_required
 # from saihan.models import ...
 
 
 @app_seller.route("/items")
 def seller_items():
-    dic1={
-        'name':'Product.name',
-        'price':'Product.price',
-        'heji':5000,
-        'use':'删除',
-        'photo':"ProductMedia.filename"
-    }
-    dic2={
-        'name':'Product.name',
-        'price':'Product.price',
-        'heji':5000,
-        'use':'删除',
-        'photo':"ProductMedia.filename"
-    }
-
-    users = [dic1,dic2]
-    return render_template("seller_items.html",users=users)
+    profile = Profile.query.filter_by(user_id=current_user.id).first()
+    products = Product.query.filter_by(seller_id=current_user.id)
+    # print(url_for("static", filename="images/products/"+products[0].attachments[0].filename))
+    return render_template("seller_items.html",
+                            profile=profile,
+                            products=products)
 
 
 @app_seller.route("/order",methods=["GET","POST"])

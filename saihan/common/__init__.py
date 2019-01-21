@@ -9,3 +9,4 @@ app_common = Blueprint("common", __name__, template_folder="./templates")
 
 # 导入蓝图的视图
 from . import views
+from . import insert

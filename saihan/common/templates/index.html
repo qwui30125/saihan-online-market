@@ -1,36 +1,5 @@
 {% extends 'layout.html' %}
 {% block body %}
-<body>
-	<div class="header_con">
-		<div class="header">
-			<div class="welcome fl">欢迎来到赛汉!</div>
-			<div class="fr">
-				{% if user.is_authenticated %}
-					<div class="login_info fl" style="display:block;">
-						欢迎您：<em>{{user.username}}</em>
-					</div>
-					<div class="login_btn fl">
-						<span>|</span>
-						<a href="{{url_for('common.logout')}}">登出</a>
-					</div>
-				{% else %}
-					<div class="login_btn fl">
-						<a href="{{url_for('common.login')}}">登录</a>
-						<span>|</span>
-						<a href="{{url_for('common.register')}}">注册</a>
-					</div>
-				{% endif %}
-				<div class="user_link fl">
-					<span>|</span>
-					<a href="{{url_for('user.user_info')}}">用户中心</a>
-					<span>|</span>
-					<a href="{{url_for('user.user_cart')}}">我的购物车</a>
-					<span>|</span>
-					<a href="{{url_for('user.user_order')}}">我的订单</a>
-				</div>
-			</div>
-		</div>		
-	</div>
 
 	<div class="search_bar clearfix">
 		<!-- <a href="index.html" class="logo fl"><img src="123.jpg"></a> -->
@@ -266,5 +235,4 @@
 			window.location.href = 'list.html';
 		}
 	</script>
-</body>
 {% endblock %}

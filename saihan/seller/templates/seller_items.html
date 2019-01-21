@@ -1,30 +1,10 @@
 {% extends "sellerlayout.html" %}
 {% block body %}
-<body>
-	<div class="header_con">
-		<div class="header">
-			<div class="welcome fl">欢迎来到赛汉!</div>
-			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>{{ name }}</em>
-				</div>
-				<div class="login_btn fl">
-					<a href="{{url_for('common.login')}}">登录</a>
-					<span>|</span>
-					<a href="{{url_for('common.register')}}">注册</a>
-				</div>
-				<div class="user_link fl">
-					<span>|</span>
-					<a href="{{url_for('seller.seller_items')}}">商家中心</a>
-					<span>|</span>
-					<a href="{{url_for('seller.seller_release')}}">发布商品</a>
-				</div>
-			</div>
-		</div>		
-	</div>
 
 	<div class="search_bar clearfix">
 		<!-- <a href="index.html" class="logo fl"><img src="1234.jpg"></a> -->
+		<a href="{{url_for('common.index')}}" class="logo fl"><img src="{{ url_for('static', filename='images/logo/saihan.png') }}" style="width: 100%; height:100%"
+		></a>
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;商家中心</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
@@ -44,10 +24,10 @@
 		<div class="right_content clearfix">
 				<div class="info_con clearfix">
 				<h3 class="common_title2">账户信息</h3>
-						<ul class="user_info_list">
-							<li><span>登录名：</span>18210569700</li>
-							<li><span>联系方式：</span>18210569700</li>	
-							<li><span>用户角色：</span>商家</li>	
+						<ul class="user_info_list" style="height: auto;">
+							<li><span>用户名：</span>{{ profile.nickname }}</li>
+							<li><span>联系方式：</span>{{ profile.mobile }}</li>	
+							<!-- <li><span>用户角色：</span>商家</li>	 -->
 						</ul>
 				</div>
 				
@@ -59,19 +39,21 @@
 						<th><label><input class="check-all check" type="checkbox"/> 全选</label></th>
 						<th>商品</th>
 						<th>单价</th>
-						<th>总价</th>
+						<th>状态</th>
 						
 						<th>操作</th>
 						</tr>
 						<tbody>
-						{%for user in users%}
+						{%for product in products %}
 						<tr>
 						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
-						<td class="goods"><img src="{{user['photo']}}" alt="" /><span>{{user['name']}}</span></td>
-						<td class="price">{{ user['price']}}</td>
+						<td class="goods">
+						<img src="{{ url_for('static', filename='images/products/'+product.attachments[0].filename) }}" alt="" />
+						<span>{{ product.name }}</span></td>
+						<td class="price">{{ product.price}}</td>
 						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
-						<td class="subtotal">{{user['heji']}}</td>
-						<td class="operation"><span class="delete">{{user['use']}}</span></td>
+						<td class="subtotal">{{ product.status }}</td>
+						<td class="operation"><span class="delete">删除</span></td>
 						</tr>
 						{% endfor %}
 						<!-- <tr>

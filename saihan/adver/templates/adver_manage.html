@@ -1,27 +1,5 @@
 {% extends "adverlayout.html" %}
 {% block body %}
-<body>
-	<div class="header_con">
-		<div class="header">
-			<div class="welcome fl">欢迎来到赛汉广告商主题!</div>
-			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>{{ name }}</em>
-				</div>
-				<div class="login_btn fl">
-					<a href="{{url_for('common.login')}}">登录</a>
-					<span>|</span>
-					<a href="{{url_for('common.register')}}">注册</a>
-				</div>
-				<div class="user_link fl">
-					<span>|</span>
-					<a href="{{url_for('adver.adver_manage')}}">广告商中心</a>
-					<span>|</span>
-					<a href="{{url_for('adver.adver_release')}}">发布新广告</a>
-				</div>
-			</div>
-		</div>		
-	</div>
 
 	<div class="search_bar clearfix">
 		<a href="{{ url_for('common.index') }}" class="logo fl"><img src="{{url_for('static', filename='images/logo/saihan.png')}}" style="width:100%;height:100%"></a>
