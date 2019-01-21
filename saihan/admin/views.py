@@ -3,107 +3,34 @@
 from . import app_admin
 from saihan import db
 from flask import render_template
+from flask_login import current_user
+from saihan.models import User, Profile, Authenticate, Product
 # from saihan.models import ...
 
-@app_admin.route("/admin_userinfo")
-def admin_userinfo():
-    user_list = [
-        {
-            "user_id":User.id,
-            "user_name":Profile.nickname,
-            "user_pic":Profile.avatar,
-            "user_type":User.type,
-            "check":Authenticate.status,
-            "phone_number":Profile.mobile,
-            "addr":Profile.addess
-            },
-        {
-             "user_id":User.id,
-            "user_name":Profile.nickname,
-            "user_pic":Profile.avatar,
-            "user_type":User.type,
-            "check":Authenticate.status,
-            "phone_number":Profile.mobile,
-            "addr":Profile.addess
-         },
-         {
-             "user_id":User.id,
-            "user_name":Profile.nickname,
-            "user_pic":Profile.avatar,
-            "user_type":User.type,
-            "check":Authenticate.status,
-            "phone_number":Profile.mobile,
-            "addr":Profile.addess
-         },
-         {
-             "user_id":User.id,
-            "user_name":Profile.nickname,
-            "user_pic":Profile.avatar,
-            "user_type":User.type,
-            "check":Authenticate.status,
-            "phone_number":Profile.mobile,
-            "addr":Profile.addess
-         },
-         {
-             "user_id":User.id,
-            "user_name":Profile.nickname,
-            "user_pic":Profile.avatar,
-            "user_type":User.type,
-            "check":Authenticate.status,
-            "phone_number":Profile.mobile,
-            "addr":Profile.addess
-         }
-    ]
-    return render_template("admin_center.html",u_list = user_list)
+@app_admin.route("/user/")
+@app_admin.route("/user/<int:page>")
+def admin_user(page=1):
+    admin = current_user
+    # user_cout = len(User.query.all())
+    # print(user_cout)
+    users = User.query.limit(5).offset((page-1)*5)
+    for user in users:
+        # print(user.profile)
+        user.authenticate = Authenticate.query.filter_by(user_id=user.id).first()
 
-@app_admin.route("/admin_productinfo")
-def admin_productinfo():
-    pro_list=[
-        {
-            "pro_pic":Product.attachments,
-            "id":Product.id,
-            "pro_name":Product.name,
-            "seller_name":Product.seller_name,
-            "price":Product.price,
-            "status":Product.status
-        },
-        {
-            "pro_pic":Product.attachments,
-            "id":Product.id,
-            "pro_name":Product.name,
-            "seller_name":Product.seller_name,
-            "price":Product.price,
-            "status":Product.status
-        },
-        {
-            "pro_pic":Product.attachments,
-            "id":Product.id,
-            "pro_name":Product.name,
-            "seller_name":Product.seller_name,
-            "price":Product.price,
-            "status":Product.status
-        },
-        {
-            "pro_pic":Product.attachments,
-            "id":Product.id,
-            "pro_name":Product.name,
-            "seller_name":Product.seller_name,
-            "price":Product.price,
-            "status":Product.status
-        },
-        {
-            "pro_pic":Product.attachments,
-            "id":Product.id,
-            "pro_name":Product.name,
-            "seller_name":Product.seller_name,
-            "price":Product.price,
-            "status":Product.status
-        }
-    ]
-    return render_template("admin_productinfo.html",pro_list = pro_list)
+    return render_template("admin_user.html",
+                           users=users)
 
-@app_admin.route("/admin_order/<int:page>")
-def admin_order():
+@app_admin.route("/product/")
+@app_admin.route("/product/<int:page>")
+def admin_product(page=1):
+    products = Product.query.limit(5).offset((page-1)*5)
+    return render_template("admin_product.html",
+                           products=products)
+
+@app_admin.route("/order/")
+@app_admin.route("/order/<int:page>")
+def admin_order(page=1):
     # profile = Profile.query.limit(5)
     # profile = Profile.query.limit(5).offset(6)
     # profile = Profile.query.count(Profile.id)
@@ -161,8 +88,9 @@ def admin_order():
     ]
     return render_template("admin_order.html",order_list=order_list)
 
-@app_admin.route("/admin_adver")
-def admin_adver():
+@app_admin.route("/adver/")
+@app_admin.route("/adver/<int:page>")
+def admin_adver(page=1):
     ad_list = [
         {
             "ad_id":"AdverSH0002",

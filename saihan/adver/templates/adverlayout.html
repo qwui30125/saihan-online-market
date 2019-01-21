@@ -18,7 +18,8 @@
         <div class="header">
             <div class="welcome fl">欢迎来到赛汉广告商主题!</div>
             <div class="fr">
-                <div class="login_info fl" style="display:block;">
+                {% if current_user.is_authenticated%}
+                    <div class="login_info fl" style="display:block;">
                         欢迎您：<em>{{user.username}}</em>
                     </div>
                     <div class="login_btn fl">

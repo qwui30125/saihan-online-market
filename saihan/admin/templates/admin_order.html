@@ -1,36 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<title>订单管理中心</title>
-	<link rel="stylesheet" type="text/css" href="static/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="static/css/main.css">
-</head>
-<body>
-	<div class="header_con">
-		<div class="header">
-			<div class="welcome fl">欢迎来到赛汉!</div>
-			<div class="fr">
-				<div class="login_info fl">
-					欢迎您：<em>张 山</em>
-				</div>
-				<div class="login_btn fl">
-					<a href="login.html">登录</a>
-					<span>|</span>
-					<a href="register.html">用户注册</a>
-				</div>
-				<div class="user_link fl">
-					<span>|</span>
-					<a href="index.html">回到主页</a>
-					<span>|</span>
-				</div>
-			</div>
-		</div>		
-	</div>
+{% extends "adminlayout.html" %}
+{% block body %}
 
 	<div class="search_bar clearfix">
 		<a href="index.html" class="logo fl" id="shLogo"><img src="static/images/saihan1.png"></a>
-		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;订单管理</div>
+		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;管理员中心</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="输入订单编号">
 			<input type="button" class="input_btn fr" name="" value="搜索">
@@ -39,12 +12,12 @@
 
 	<div class="main_con clearfix">
 		<div class="left_menu_con clearfix">
-			<h3>订单管理中心</h3>
+			<h3>订单管理</h3>
 			<ul>
-				<li><a href="/admin/admin_userinfo">· 已注册用户管理</a></li>
-				<li><a href="#"  class="active">· 全部订单管理</a></li>
-				<li><a href="/admin/admin_adver">· 广告信息管理</a></li>
-				<li><a href="/admin/admin_productinfo">· 商品信息管理</a></li>
+				<li><a href="{{url_for('admin.admin_user')}}">· 已注册用户管理</a></li>
+				<li><a href="{{url_for('admin.admin_order')}}"  class="active">· 全部订单管理</a></li>
+				<li><a href="{{url_for('admin.admin_adver')}}">· 广告信息管理</a></li>
+				<li><a href="{{url_for('admin.admin_product')}}">· 商品信息管理</a></li>
 				
 			</ul>
 		</div>
@@ -183,6 +156,4 @@
 		<p>CopyRight © 2018 天津赛汉科技有限公司 All Rights Reserved</p>
 		<p>电话：022-****888    津ICP备*******8号</p>
 	</div>
-	
-</body>
-</html>
+{% endblock %}

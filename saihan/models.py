@@ -28,6 +28,7 @@ class User(BaseModel, db.Model, UserMixin):
         nullable=False, index=True)
     username = db.Column(db.String(32), unique=True, nullable=False)  # 用户暱称
     password_hash = db.Column(db.String(128), nullable=False)  # 密码的散列值
+    profile = db.relationship("Profile", backref="user")
 
     # 加上property装饰器后，会把函数变为属性，属性名即为函数名
     @property

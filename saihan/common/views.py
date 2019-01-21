@@ -127,7 +127,7 @@ def login():
     elif user.type == "ADVERTISEMENT":
         return redirect(url_for("adver.adver_manage"))
     elif user.type == "ADMINISTRATOR":
-        return redirect(url_for("admin.admin_userinfo"))
+        return redirect(url_for("admin.admin_user"))
 
 @app_common.route("/logout")
 @login_required
