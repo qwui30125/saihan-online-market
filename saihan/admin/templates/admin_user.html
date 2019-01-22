@@ -39,7 +39,7 @@
 							<td width="15%"><img style="height:100px;width: 100px;" src='{{ url_for("static", filename="images/usericon/"+user.profile[0].avatar) }}'></td>
 							<td width="15%">{{user.username}}</td>
 							<td width="15%">{{user.type}}</td>
-							<td width="15%">{{user.profile[0].mobile}}</td>
+							<td width="15%">{{user.profile.mobile}}</td>
 							{% if not user.authenticate %}
 							<td width="15%">未认证</td>
 							{% else %}
