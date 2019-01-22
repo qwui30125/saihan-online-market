@@ -1,0 +1,67 @@
+<!-- 引入css -->
+{% macro import_css(files) %}
+    {% for file in files %}
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/'+file)}}">
+    {% endfor %}
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
+{% endmacro %}
+
+<!-- 引入javascript -->
+{% macro import_js(files) %}
+    {% for file in files %}
+    <script type="text/javascript" src="{{url_for('static', filename='js/'+file)}}"></script>
+    {% endfor %}
+{% endmacro %}
+
+<!-- 头部导航栏 -->
+{% macro top_nav(current_user) %}
+    <div class="header_con">
+        <div class="header">
+            <div class="welcome fl">欢迎来到赛汉!</div>
+            <div class="fr">
+                {% if current_user.is_authenticated %}
+                    <div class="login_info fl" style="display:block;">
+                        欢迎您：<em>{{current_user.username}}</em>
+                    </div>
+                    <div class="login_btn fl">
+                        <span>|</span>
+                        <a href="{{url_for('common.logout')}}">登出</a>
+                    </div>
+                {% else %}
+                    <div class="login_btn fl">
+                        <a href="{{url_for('common.login')}}">登录</a>
+                        <span>|</span>
+                        <a href="{{url_for('common.register')}}">注册</a>
+                    </div>
+                {% endif %}
+                <div class="user_link fl">
+                    <span>|</span>
+                    {% if current_user.type == "PERSONAL" %}
+                    <a href="{{url_for('user.user_info')}}">用户中心</a>
+                    <span>|</span>
+                    <a href="{{url_for('user.user_cart')}}">我的购物车</a>
+                    <span>|</span>
+                    <a href="{{url_for('user.user_order')}}">我的订单</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>      
+    </div>
+{% endmacro %}
+
+<!-- 页面底部 -->
+{% macro footer() %}
+    <div class="footer no-mp">
+        <div class="foot_link">
+            <a href="#">关于我们</a>
+            <span>|</span>
+            <a href="#">联系我们</a>
+            <span>|</span>
+            <a href="#">招聘人才</a>
+            <span>|</span>
+            <a href="#">友情链接</a>        
+        </div>
+        <p>CopyRight © 2016 All Rights Reserved</p>
+        <p>电话：010-****888    京ICP备*******8号</p>
+    </div>
+{% endmacro %}

@@ -3,7 +3,7 @@
 from . import app_common
 from saihan import db, login_manager
 from flask import render_template, request, session, redirect, url_for
-from saihan.models import User, Profile
+from saihan.models import User, Profile, Product
 from flask_login import login_user, current_user, login_required, logout_user
 # from saihan.models import ...
 
@@ -17,8 +17,13 @@ def unauthorized():
 
 @app_common.route("/index")
 def index():
-    return render_template("index.html", user=current_user)
-
+    products = Product.query.all()
+    cart = current_user.profile[0].cart
+    count = len(cart)
+    print("count:", count)
+    return render_template("index.html", 
+                           user=current_user,
+                           products=products)
 
 @app_common.route("/register", methods=["POST", "GET"])
 def register():

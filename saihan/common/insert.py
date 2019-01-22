@@ -7,7 +7,7 @@ from saihan.models import *
 @app_common.route("/insert_user_admin_saihan")
 def insert_user():
     userA = User(type='PERSONAL', username='userA', 
-        password_hash="pbkdf2:sha256:50000$AmvDhqDQ$7e68cbb\47c8627127b63b53aedd9969a98e5e5385443c07d54feeca5826ff2a8")
+        password_hash="pbkdf2:sha256:50000$AmvDhqDQ$7e68cbb47c8627127b63b53aedd9969a98e5e5385443c07d54feeca5826ff2a8")
     userB = User(type='PERSONAL', username='userB', 
         password_hash="pbkdf2:sha256:50000$AmvDhqDQ$7e68cbb47c8627127b63b53aedd9969a98e5e5385443c07d54feeca5826ff2a8")
     sellerA = User(type='BUSINESS', username='sellerA', 
@@ -29,6 +29,7 @@ def insert_user():
     else:
         db.session.commit()
     return "插入成功"
+
 
 @app_common.route("/insert_profile_admin_saihan")
 def insert_profile():
@@ -56,6 +57,7 @@ def insert_profile():
     else:
         db.session.commit()
     return "插入成功"
+
 
 @app_common.route("/insert_product_admin_saihan")
 def insert_product():
@@ -112,5 +114,88 @@ def insert_product():
         return "插入失败"
     else:
         db.session.commit()
-    
+    return "插入成功"
+
+
+@app_common.route("/insert_order_admin_saihan")
+def insert_order():
+    # class Order(BaseModel, db.Model):
+    # """订单"""
+    # __tablename__ = "orders"
+
+    # id = db.Column(db.Integer, primary_key=True)
+    # product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
+    # buyer_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)
+    # status = db.Column(  # 订单状态
+    #     db.Enum(
+    #         "PENDING",  # 新订单
+    #         "PURCHASED",  # 买家已付款
+    #         "DELIVERED",  # 卖家已发货
+    #         "COMPLETED",  # 已完成
+    #         "CANCELLED"  # 已取消
+    #     ),
+    #     default="PENDING", nullable=False, index=True)
+    # comments = db.Column(db.Text())  # 备注
+    userA = User.query.filter_by(username='userA').first()
+    userB = User.query.filter_by(username='userB').first()
+
+    order1 = Order(product_id=1, buyer_id=userA.id, status="PENDING")
+    order2 = Order(product_id=1, buyer_id=userA.id, status="PURCHASED", comments="包邮")
+    order3 = Order(product_id=2, buyer_id=userA.id, status="DELIVERED")
+    order4 = Order(product_id=2, buyer_id=userA.id, status="COMPLETED")
+    order5 = Order(product_id=3, buyer_id=userA.id, status="CANCELLED")
+    order6 = Order(product_id=4, buyer_id=userB.id, status="PENDING", comments="包邮")
+    order7 = Order(product_id=4, buyer_id=userB.id, status="PURCHASED", comments="寄顺丰")
+    order8 = Order(product_id=5, buyer_id=userB.id, status="DELIVERED")
+    order9 = Order(product_id=5, buyer_id=userB.id, status="COMPLETED", comments="寄申通")
+    orderA = Order(product_id=6, buyer_id=userB.id, status="CANCELLED")
+    orders = [order1, order2, order3, order4, order5, order6, order7, order8, order9, orderA]
+    try:
+        db.session.add_all(orders)
+    except:
+        db.session.rollback()
+        return "插入失败"
+    else:
+        db.session.commit()
+    return "插入成功"
+
+@app_common.route("/insert_address_admin_saihan")
+def insert_address():
+    # class Address(BaseModel, db.Model):
+    # """地址"""
+    # __tablename__ = "user_addresses"
+
+    # id = db.Column(db.Integer, primary_key=True)
+    # user_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)
+    # country = db.Column(db.String(32))  # 国家
+    # province = db.Column(db.String(32))  # 省/直辖市
+    # city = db.Column(db.String(32))  # 城市
+    # street = db.Column(db.String(32))  # 街道
+    # name = db.Column(db.String(32))  # 联系人姓名
+    # phone = db.Column(db.String(32))  # 联系人电话
+    userA = User.query.filter_by(username='userA').first()
+    userB = User.query.filter_by(username='userB').first()
+    profileA = Profile.query.filter_by(user_id=userA.id).first()
+    profileB = Profile.query.filter_by(user_id=userB.id).first()
+
+    addressA1 = Address(user_id=userA.id, country="中国", province="湖北", city="松滋市",
+                       street="新江口镇 民主路10巷66号", name="张三", phone="18672739019")
+    addressA2 = Address(user_id=userA.id, country="中国", province="北京", city="北京市",
+                       street="海淀区 东北旺西路8号中关村软件园", name="李四", phone="18672569019")
+    addressA3 = Address(user_id=userA.id, country="中国", province="天津", city="天津市",
+                       street="北辰区 农科大厦", name=profileA.nickname, phone=profileA.mobile)
+    addressB1 = Address(user_id=userB.id, country="中国", province="湖北", city="松滋市",
+                       street="新江口镇 民主路10巷66号", name="张三", phone="18672739019")
+    addressB2 = Address(user_id=userB.id, country="中国", province="北京", city="北京市",
+                       street="海淀区 东北旺西路8号中关村软件园", name="李四", phone="18672569019")
+    addressB3 = Address(user_id=userB.id, country="中国", province="天津", city="天津市",
+                       street="北辰区 农科大厦", name=profileB.nickname, phone=profileB.mobile)
+    addresses = [addressA1, addressA2, addressA3, addressB1, addressB2, addressB3]
+    try:
+        db.session.add_all(addresses)
+    except:
+        db.session.rollback()
+        return "插入失败"
+    else:
+        db.session.commit()
     return "插入成功"

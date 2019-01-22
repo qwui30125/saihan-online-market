@@ -1,8 +1,9 @@
 {% extends 'layout.html' %}
 {% block body %}
-
+	<!-- 搜索栏 -->
 	<div class="search_bar clearfix">
-		<!-- <a href="index.html" class="logo fl"><img src="123.jpg"></a> -->
+		<a href="{{url_for('common.index')}}" class="logo fl"><img src="{{ url_for('static', filename='images/logo/saihan.png') }}" style="width: 100%; height:100%"
+		></a>
 		<div class="search_con fl">
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
 			<input type="button" class="input_btn fr" name="" value="搜索">
@@ -12,16 +13,13 @@
 			<div class="goods_count fl" id="show_count">1</div>
 		</div>
 	</div>
-
+	
 	<div class="navbar_con">
 		<div class="navbar">
 			<h1 class="fl">全部商品分类</h1>
 			<ul class="navlist fl">
 				<li><a href="">首页</a></li>
-				<li class="interval">|</li>
-				<li><a href="">手机赛汉</a></li>
-				<li class="interval">|</li>
-				<li><a href="">抽奖</a></li>
+				<!-- <li class="interval">|</li> -->
 			</ul>
 		</div>
 	</div>
@@ -37,202 +35,50 @@
 		</ul>
 		<div class="slide fl">
 			<ul class="slide_pics">
-				<li><img src="static/images/111.jpg" alt="幻灯片"></li>
-				<li><img src="static/images/222.jpg" alt="幻灯片"></li>
+				<li><img style="width:100%;height:100%" src="{{url_for('static', filename='images/banner/111.jpg')}}" alt="幻灯片"></li>
+				<li><img src="{{url_for('static', filename='images/banner/222.jpg')}}" alt="幻灯片"></li>
 			</ul>
 			<div class="prev"></div>
 			<div class="next"></div>
 			<ul class="points"></ul>
 		</div>
 		<div class="adv fl">
-			<a href="#"><img src="static/images/p10.jpg"></a>
-			<a href="#"><img src="static/images/timg.jpg"></a>
+			<a href="#"><img src="{{url_for('static', filename='images/banner/p10.jpg')}}"></a>
+			<a href="#"><img src="{{url_for('static', filename='images/banner/p10.jpg')}}"></a>
 		</div>
 	</div>
 
-	<div class="list_model">
-		<div class="list_title clearfix">
-			<h3 class="fl" id="model01">书籍</h3>
-			<div class="subtitle fl">
-				<span>|</span>
-				<a href="#">哈利波特</a>
-				<a href="#">平凡的世界</a>
-				<a href="#">百年孤独</a>
+	<!-- 商品列表 -->
+	<div class="list_model" style="height:auto; background: #f5f5f5;">
+		<div class="list_title clearfix" style="height:0;margin-bottom: 20px;">
+
+		</div>
+
+		<div class="item-list">
+			<div class="item-list-wrap">
+				<!-- 循环获取商品 -->
+				{% for product in products %}
+				<a href="{{ url_for('user.detail', product_id=product.id) }}" class="item-wrap">
+					<div class="item-img" style="background-image: url({{ url_for('static', filename='images/products/'+product.attachments[0].filename) }})"></div>
+					<div class="item-info">
+						<p class="item-title">{{product.name}}</p>
+						<p class=""></p>
+						<div class="price-line">
+							<p class="price-unit">￥</p>
+							<p class="price-value">{{product.price}}</p>
+						</div>
+					</div>
+					<div class="user-line">
+						<div class="user-info">
+							<img src="{{url_for('static', filename='images/usericon/'+product.seller.avatar)}}" class="usericon">
+							<p class="user-name">{{product.seller.nickname}}</p>
+							<img src="{{url_for('static', filename='images/usertag/level0.png')}}" class='user-tag'>
+						</div>
+					</div>
+				</a>
+				{% endfor %}
+
 			</div>
-			<a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
-		</div>
-
-		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="static/images/123/4.png"></div>
-			<ul class="goods_list fl">
-				<li>
-					<h4><a href="#">了不起的盖茨比</a></h4>
-					<a href="#"><img src="static/images/123/p1.jpg"></a>
-					<!-- <div class="prize">¥ 30.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">金庸传</a></h4>
-					<a href="#"><img src="static/images/123/p2.jpg"></a>
-					<!-- <div class="prize">¥ 5.50</div> -->
-				</li>
-				<li>
-					<h4><a href="#">内向相关竞争力</a></h4>
-					<a href="#"><img src="static/images/123/p3.jpg"></a>
-					<!-- <div class="prize">¥ 3.90</div> --> 
-				</li>
-				<li>
-					<h4><a href="#">大明</a></h4>
-					<a href="#"><img src="static/images/123/p4.jpg"></a>
-					<!-- <div class="prize">¥ 25.80</div> -->
-				</li>
-			</ul>
 		</div>
 	</div>
-
-	<div class="list_model">
-		<div class="list_title clearfix">
-			<h3 class="fl" id="model02">二手房</h3>
-			<div class="subtitle fl">
-				<span>|</span>
-				<a href="#">河西</a>
-				<a href="#">南开</a>				
-			</div>
-			<a href="#" class="goods_more fr">查看更多 ></a>
-		</div>
-
-		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="static/images/123/1.png"></div>
-			<ul class="goods_list fl">
-				<li>
-					<h4><a href="#">万科</a></h4>
-					<a href="#"><img src="static/images/123/p5.jpg"></a>
-					<!-- <div class="prize">¥ 48000.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">万达</a></h4>
-					<a href="#"><img src="static/images/123/p7.jpg"></a>
-					<!-- <div class="prize">¥ 46000.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">天拖</a></h4>
-					<a href="#"><img src="static/images/123/p6.jpg"></a>
-					<!-- <div class="prize">¥ 19000.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">恒大</a></h4>
-					<a href="#"><img src="static/images/123/p8.jpg"></a>
-					<!-- <div class="prize">¥ 25000.00</div> -->
-				</li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="list_model">
-		<div class="list_title clearfix">
-			<h3 class="fl" id="model03">手表</h3>
-			<div class="subtitle fl">
-				<span>|</span>
-				<a href="#">卡西欧</a>
-				<a href="#">劳力士</a>
-				<a href="#">浪琴</a>
-			</div>
-			<a href="#" class="goods_more fr">查看更多 ></a>
-		</div>
-
-		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="static/images/123/3.png"></div>
-			<ul class="goods_list fl">
-				<li>
-					<h4><a href="#">卡西欧</a></h4>
-					<a href="#"><img src="static/images/123/p9.jpg"></a>
-					<!-- <div class="prize">¥ 3800.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">天梭</a></h4>
-					<a href="#"><img src="static/images/123/p10.jpg"></a>
-					<!-- <div class="prize">¥ 338.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">浪琴</a></h4>
-					<a href="#"><img src="static/images/123/p11.jpg"></a>
-					<!-- <div class="prize">¥ 118.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">卡地亚</a></h4>
-					<a href="#"><img src="static/images/123/p12.jpg"></a>
-					<!-- <div class="prize">¥ 128.00</div> -->
-				</li>
-			</ul>
-		</div>
-	</div>
-
-	<div class="list_model">
-		<div class="list_title clearfix">
-			<h3 class="fl" id="model04">汽车</h3>
-			<div class="subtitle fl">
-				<span>|</span>
-				<a href="#">本田</a>
-				<a href="#">丰田</a>
-				<a href="#">奔驰</a>
-			</div>
-			<a href="#" class="goods_more fr">查看更多 ></a>
-		</div>
-
-		<div class="goods_con clearfix">
-			<div class="goods_banner fl"><img src="static/images/123/2.png"></div>
-			<ul class="goods_list fl">
-				<li>
-					<h4><a href="#">保时捷</a></h4>
-					<a href="#"><img src="static/images/123/p13.jpg"></a>
-					<!-- <div class="prize">¥ 380000.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">法拉利</a></h4>
-					<a href="#"><img src="static/images/123/p14.jpg"></a>
-					<!-- <div class="prize">¥ 900000.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">劳斯莱斯</a></h4>
-					<a href="#"><img src="static/images/123/p15.jpg"></a>
-					<!-- <div class="prize">¥ 500000.00</div> -->
-				</li>
-				<li>
-					<h4><a href="#">兰博基尼</a></h4>
-					<a href="#"><img src="static/images/123/p16.jpg"></a>
-					<!-- <div class="prize">¥ 400000.00</div> -->
-				</li>
-			</ul>
-		</div>
-	</div>
-
-
-	<div class="footer">
-		<div class="foot_link">
-			<a href="#">关于我们</a>
-			<span>|</span>
-			<a href="#">联系我们</a>
-			<span>|</span>
-			<a href="#">招聘人才</a>
-			<span>|</span>
-			<a href="#">友情链接</a>		
-		</div>
-		<p>电话：********    京ICP备*******8号</p>
-	</div>
-	<script type="text/javascript" src="js/slideshow.js"></script>
-	<script type="text/javascript">
-		BCSlideshow('focuspic');
-		var oFruit = document.getElementById('fruit_more');
-		var oShownum = document.getElementById('show_count');
-
-		var hasorder = localStorage.getItem('order_finish');
-
-		if(hasorder)
-		{
-			oShownum.innerHTML = '2';
-		}
-
-		oFruit.onclick = function(){
-			window.location.href = 'list.html';
-		}
-	</script>
 {% endblock %}

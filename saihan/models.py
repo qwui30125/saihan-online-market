@@ -68,6 +68,7 @@ class Profile(BaseModel, db.Model):
     addresses = db.relationship("Address", backref="user")
     products = db.relationship("Product", backref="seller")
     orders = db.relationship("Order", backref="buyer")
+    cart = db.relationship("Cart", backref="user")
     # statuses_sent = db.relationship("Status", backref="source")
     # statuses_received = db.relationship("Status", backref="target")
 
@@ -178,3 +179,12 @@ class ProductMedia(BaseModel, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
     filename = db.Column(db.String(64), nullable=False)  # 文件名
+
+
+
+class Cart(BaseModel, db.Model):
+    """商品照片"""
+    __tablename__ = "user_cart"
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user_profile.user_id"), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)

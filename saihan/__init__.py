@@ -1,6 +1,6 @@
 # coding:utf-8
 
-from flask import Flask
+from flask import Flask, redirect, url_for
 from config import config_map
 from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
@@ -43,6 +43,10 @@ def create_app(config_name):
     app.register_blueprint(adver.app_adver, url_prefix="/adver")
     app.register_blueprint(seller.app_seller, url_prefix="/seller")
     app.register_blueprint(user.app_user, url_prefix="/user")
+
+    @app.route("/")
+    def index():
+        return redirect(url_for("common.index"))
 
 
     return app
