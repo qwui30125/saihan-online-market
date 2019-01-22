@@ -2,8 +2,8 @@
 
 from . import app_user
 from saihan import db
-from flask import render_template, url_for
-from saihan.models import Product, Order, Profile
+from flask import render_template, url_for, redirect
+from saihan.models import Product, Order, Profile, Cart
 from flask_login import current_user, login_required
 # from saihan.models import ...
 
@@ -26,7 +26,19 @@ def user_cart():
     #     'description':'Product.description',
     #     'price':'Product.price'        
     # }
-    return render_template("user_cart.html", user=current_user)
+    cart = Cart.query.filter_by(user_id=current_user.id)
+    products = []
+    for item in cart:
+        product = Product.query.filter_by(id=item.product_id).first()
+        products.append(product)
+    return render_template("user_cart.html",
+                           user=current_user,
+                           cart=cart,
+                           products=products,
+                           length=len(products))
+    
+    # print(help(url_for))
+
 
 
 # 支付界面
@@ -54,10 +66,36 @@ def place_order(places=None):
 @app_user.route('/detail/<int:product_id>')
 @login_required
 def detail(product_id=None):
-    product_id = product_id
     product = Product.query.filter_by(id=product_id).first()
-    product = Product()
-    return render_template("detail.html", product=product, user=current_user)
+    cart = current_user.profile[0].cart
+    count = len(cart)
+    print("count:", count)
+    return render_template("product_detail.html", 
+                            product=product, 
+                            user=current_user,
+                            count=count)
+
+@app_user.route('/detail/buy/<int:product_id>')
+@login_required
+def add_to_cart(product_id):
+    product = Product.query.filter_by(id=product_id).first()
+    if product.status == "SELLED":
+        return redirect(url_for("common.error", error="商品已售出"))
+    else:
+        cart = Cart(user_id=current_user.id, product_id=product_id)
+        db.session.add(cart)
+        db.session.commit()
+    return redirect(url_for("user.detail", product_id=product_id))
+
+
+@app_user.route('/cart/remove/<int:product_id>')
+@login_required
+def remove_from_cart(product_id):
+    item = Cart.query.filter_by(product_id=product_id, user_id=current_user.id).first()
+    db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for("user.user_cart"))
+
 
 # 个人简介
 @app_user.route('/info')
@@ -80,10 +118,10 @@ def user_info():
 @app_user.route('/order')
 @login_required
 def user_order():
-    user_id = 1
-    order = Order.query.filter_by(buyer_id = id).first()
- 
-    return render_template("user_order.html",  user=current_user)
+    orders = current_user.profile[0].orders
+    return render_template("user_order.html",
+                           orders=orders,
+                           user=current_user)
 
 
 # 收货地址

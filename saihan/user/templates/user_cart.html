@@ -40,78 +40,25 @@
 
 			<!-- 下方商品记录-->
 			<div class="content">
-				{%for i in cart%}
-				<div class="g-item">
+				{% for i in range(length) %}
+				<div class="g-item">	
 					<p class="check-box">
 						<input type="checkbox" name="check">
-						<img src="static/images/images1/{{i['attachments']}}">
+						<img src="{{ url_for('static', filename='images/products/'+products[i].attachments[0].filename) }}">
 					</p>
-					<p class="goods">啊啊啊</p>
-					<p class="price">&yen;{{i['price']}}</p>
+					<p class="goods">{{ products[i].name }}</p>
+					<p class="price">&yen;{{products[i].price}}</p>
 					<p class="count">
-						<a href="javascript:void(0)" class="minus">-</a>
-						<input type="text" value="1">
-						<a href="javascript:void(0)" class="add">+</a>
+						<!-- <a href="javascript:void(0)" class="minus">-</a> -->
+						<input value="1">
+						<!-- <a href="javascript:void(0)" class="add">+</a> -->
 					</p>
 					<p class="sum">
-						<b>&yen;188</b>
+						<b>&yen;{{products[i].price}}</b>
 					</p>
-					<p class="action">移除</p>
+					<a class="action" href="{{ url_for('user.remove_from_cart', product_id=products[i].id) }}">移除</a>
 				</div>
 				{%endfor%}
-				
-			{#	<div class="g-item">
-					<p class="check-box">
-						<input type="checkbox" name="check">
-						<img src="static/images/images1/1-270x270-2109-SDK5WUW8.jpg">
-					</p>
-					<p class="goods">欢乐时光水果果篮</p>
-					<p class="price">&yen;188</p>
-					<p class="count">
-						<a href="javascript:void(0)" class="minus">-</a>
-						<input type="text" value="1">
-						<a href="javascript:void(0)" class="add">+</a>
-					</p>
-					<p class="sum">
-						<b>&yen;188</b>
-					</p>
-					<p class="action">移除</p>
-				</div>
-				<div class="g-item">
-					<p class="check-box">
-						<input type="checkbox" name="check">
-						<img src="static/images/images1/1-270x270-2109-SDK5WUW8.jpg">
-					</p>
-					<p class="goods">欢乐时光水果果篮</p>
-					<p class="price">&yen;188</p>
-					<p class="count">
-						<a href="javascript:void(0)" class="minus">-</a>
-						<input type="text" value="1">
-						<a href="javascript:void(0)" class="add">+</a>
-					</p>
-					<p class="sum">
-						<b>&yen;188</b>
-					</p>
-					<p class="action">移除</p>
-				</div>
-				<div class="g-item">
-					<p class="check-box">
-						<input type="checkbox" name="check">
-						<img src="static/images/images1/1-270x270-2109-SDK5WUW8.jpg">
-					</p>
-					<p class="goods">欢乐时光水果果篮</p>
-					<p class="price">&yen;188</p>
-					<p class="count">
-						<a href="javascript:void(0)" class="minus">-</a>
-						<input type="text" value="1">
-						<a href="javascript:void(0)" class="add">+</a>
-					</p>
-					<p class="sum">
-						<b>&yen;188</b>
-					</p>
-					<p class="action">移除</p>
-				</div>
-				#}
 			</div>
 		
 		</div>

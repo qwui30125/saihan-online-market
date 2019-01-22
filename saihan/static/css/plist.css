@@ -1,0 +1,252 @@
+/*清除默认样式*/
+html{
+    font: 12px/1.5 tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;
+}
+body,div,a,span,p{
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+
+/*头部导航栏*/
+.head{
+    margin: 0 auto;
+    width: 100%;
+    height: 35px;
+    background-color: #f5f5f5;
+}
+
+/*主体部分*/
+.main{
+    background-color: #f5f5f5;
+}
+.banner-wrap{
+/*横幅logo*/
+    width: 100%;
+    height: 354px;
+    background-color: #ffd84d;
+    margin-bottom: 30px;
+}
+.main-wrap{ 
+/*背景图片*/
+    height: 100%;
+    width: 1040px;
+    margin: 0 auto;
+    /*position: relative;*/
+    background-image: url("../static/banner.png");
+}
+.tabbar{
+/*分类栏*/
+    border-radius: 4px;
+    background-color: #ffd84d;
+    margin: 0 auto;
+    height: 60px;
+    width: 1040px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 60px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+.tabbar>.item{
+/*单个分类样式*/
+    cursor: pointer;
+    margin-right: 40px;
+    height: 33px;
+}
+.name{
+/*未选中分类样式*/
+    color: #222;
+    font-size: 16px;
+    height: 33px;
+    line-height: 33px;
+}
+.name-active{
+/*已选中分类样式*/
+    font-size: 20px;
+    height: 28px;
+    line-height: 28px;
+    font-family: PingFangSC-Semibold;
+    font-weight: 700;
+}
+/*商品列表*/
+.item-list{
+    margin: 0 auto;
+    width: 1040px;
+    min-height: 680px;
+    margin-bottom: 20px;
+}
+.item-list-wrap{
+    width:1050px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.item-wrap{
+/*单个商品样式*/
+    border-radius: 4px;
+    width: 200px;
+    height: 330px;
+    margin-right: 10px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.item-img{
+/*商品图片*/
+    width: 200px;
+    height: 200px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    background-color: #ddd;
+    background-size: cover;
+}
+.item-info{
+/*商品介绍及价格*/
+    width: 170px;
+    margin: 10px 15px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 0;
+    padding-bottom: 14px;
+    border-bottom: .5px solid #e6e6e6;
+}
+.item-title{
+/*商品介绍*/
+    font-size: 13px;
+    color: #222;
+    height: 40px;
+    width: 170px;
+    line-height: 20px;
+    overflow: hidden;
+}
+.price-line{
+/*价格行样式*/
+    display: flex;
+    flex-direction: row;
+    width: 170px;
+    margin-top: 5px;
+}
+.price-unit{
+/*货币类型*/
+    font-size: 10px;
+    color: #f44;
+    height: 14px;
+    line-height: 22px;
+}
+.price-value{
+/*金额*/
+    font-size: 16px;
+    color: #f44;
+    height: 18px;
+    line-height: 18px;
+}
+.user-line{
+/*用户信息栏*/
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 200px;
+    height: 43px;
+    justify-content: center;
+}
+.user-info{
+/*用户信息总样式*/
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 170px;
+    height: 20px;
+}
+.usericon{
+/*商家用户头像*/
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+}
+.user-name{
+/*商家用户名称*/
+    font-size: 12px;
+    color: #222;
+    height: 17px;
+    width: 80px;
+    padding-left: 10px;
+    line-height: 17px;
+}
+.user-tag{
+/*商家用户等级*/
+    height: 12.5px;
+    width: 87px;
+}
+/*分页栏*/
+.pagination{
+/*总的样式*/
+    margin: 0 auto;
+    width: 1040px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+.el-pagination{
+/*内容区样式*/
+    white-space: nowrap;
+    padding: 2px 5px;
+    color: #303133;
+    font-weight: 700;
+}
+/*.el-pagination::after, .el-pagination::before {
+    display: table;
+    content: "";
+}
+.el-pagination::after{
+    clear: both;
+}*/
+.button-prev{
+/*前一页箭头*/
+}
+.button-next{
+/*后一页箭头*/
+}
+.el-pager{
+/*页数列表样式*/
+    user-select: none;
+    list-style: none;
+    font-size: 0;
+}
+.el-pager, .el-pager li{
+    vertical-align: top;
+    margin: 0;
+    display: inline-block;
+}
+.el-pager li{
+/*单个页数样式*/
+    padding: 0 4px;
+    margin: 0 2px;
+    background: #fff;
+    font-size: 13px;
+    min-width: 35.5px;
+    height: 28px;
+    line-height: 28px;
+    box-sizing: border-box;
+}
+
+.advertisement{
+    margin: 0 auto;
+    height: 110px;
+    width: 1040px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 92px;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+
+/*底部样式*/
+.footer{
+    margin: 0 auto;
+    width: 1190px;
+    height: 35px;
+}

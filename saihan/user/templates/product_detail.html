@@ -2,14 +2,15 @@
 {% block body %}
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl"><img src="static/images/saihan.png"></a>
+		<a href="{{url_for('common.index')}}" class="logo fl"><img src="{{ url_for('static', filename='images/logo/saihan.png') }}" style="width: 100%; height:100%"
+		></a>
 		<div class="search_con fl">
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
 			<input type="button" class="input_btn fr" name="" value="搜索">
 		</div>
 		<div class="guest_cart fr">
 			<a href="{{ url_for('user.user_cart') }}" class="cart_name fl">我的购物车</a>
-			<div class="goods_count fl" id="show_count">1</div>
+			<div class="goods_count fl" id="show_count">{{count}}</div>
 		</div>
 	</div>
 
@@ -28,11 +29,11 @@
 				</ul>
 			</div>
 			<ul class="navlist fl">
-				<li><a href="">首页</a></li>
-				<li class="interval">|</li>
+				<li><a href="{{url_for('common.index')}}">首页</a></li>
+				<!-- <li class="interval">|</li>
 				<li><a href="">手机赛汉</a></li>
 				<li class="interval">|</li>
-				<li><a href="">抽奖</a></li>
+				<li><a href="">抽奖</a></li> -->
 			</ul>
 		</div>
 	</div>
@@ -46,7 +47,7 @@
 	</div>
 
 	<div class="goods_detail_con clearfix">
-		<div class="goods_detail_pic fl"><img src="static/images/123/p17.jpg"></div>
+		<div class="goods_detail_pic fl"><img style="height: 100%;width: 100%" src="{{ url_for('static', filename='images/products/'+product.attachments[0].filename) }}"></div>
 
 		<div class="goods_detail_list fr">
 			<h3>{{ product.name }}</h3>
@@ -56,17 +57,13 @@
 				<!-- <span class="show_unit">单  位：1块</span> -->
 			</div>
 			<div class="goods_num clearfix">
-				<div class="num_name fl">数 量：</div>
-				<div class="num_add fl">
-					<input type="text" class="num_show fl" value="1">
-					<a href="javascript:;" class="add fr">+</a>
-					<a href="javascript:;" class="minus fr">-</a>	
-				</div> 
+				<div class="num_name fl" style="font-size:16px;">数 量：1</div>
+
 			</div>
-			<div class="total">总价：<em>{{product.price}}元</em></div>
+			<div class="total" style="font-size:16px;">总 价：<em>{{product.price}}元</em></div>
 			<div class="operate_btn">
-				<a href="{{ url_for('user.place_order') }}" class="buy_btn">立即购买</a>
-				<a href="{{ url_for('user.user_cart') }}" class="add_cart" id="add_cart">加入购物车</a>				
+				<!-- <a href="{{ url_for('user.place_order') }}" class="buy_btn">立即购买</a> -->
+				<a href="{{ url_for('user.add_to_cart', product_id=product.id) }}" class="add_cart" id="add_cart">加入购物车</a>				
 			</div>
 		</div>
 	</div>
@@ -77,7 +74,7 @@
 				<h3>商品详情</h3>
 				<ul>
 					<li>
-						<a href="#"><img src="static/images/123/p17.jpg"></a>
+						<a href="#"><img src="{{ url_for('static', filename='images/products/'+product.attachments[0].filename) }}"></a>
 						<h4><a href="#">{{product.name}}</a></h4>
 						<div class="prize">￥{{product.price}}</div>
 					</li>
