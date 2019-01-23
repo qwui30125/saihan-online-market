@@ -36,7 +36,7 @@
 				<table id="cartTable">
 						<thead>
 						<tr>
-						<th><label><input class="check-all check" type="checkbox"/> 全选</label></th>
+						<!-- <th><label><input class="check-all check" type="checkbox"/> 全选</label></th> -->
 						<th>商品</th>
 						<th>单价</th>
 						<th>状态</th>
@@ -46,7 +46,7 @@
 						<tbody>
 						{%for product in products %}
 						<tr>
-						<td class="checkbox"><input class="check-one check" type="checkbox" /></td>
+						<!-- <td class="checkbox"><input class="check-one check" type="checkbox" /></td> -->
 						<td class="goods">
 						<img src="{{ url_for('static', filename='images/products/'+product.attachments[0].filename) }}" alt="" />
 						<span>{{ product.name }}</span></td>
@@ -83,11 +83,11 @@
 						</tbody>
 					   </table>
 					   <div class="foot" id="foot">
-						<label class=" fl select-all"><input type="checkbox" class="check-all check" /> 全选</label>
-						<a class="fl delete" id="deleteAll" href="javascript:;" rel="external nofollow" >删除</a>
-						<div class="fr closing">结 算</div>
-						<div class="fr total">合计：￥<span id="priceTotal">0.00</span></div>
-						<div class="fr select" id="selected">已选商品<span id="selectedTotal">0</span>件<span class="arrow up">︽</span><span class="arrow down">︾</span></div>
+						<!-- <label class=" fl select-all"><input type="checkbox" class="check-all check" /> 全选</label> -->
+						<!-- <a class="fl delete" id="deleteAll" href="javascript:;" rel="external nofollow" >删除</a> -->
+						<!-- <div class="fr closing">结 算</div> -->
+						<!-- <div class="fr total">合计：￥<span id="priceTotal">0.00</span></div> -->
+						<!-- <div class="fr select" id="selected">已选商品<span id="selectedTotal">0</span>件<span class="arrow up">︽</span><span class="arrow down">︾</span></div> -->
 						<div class="selected-view">
 						<div id="selectedViewList" class="clearfix">
 						<div><img src="images/1.jpg"><span>取消选择</span></div>

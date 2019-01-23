@@ -22,25 +22,28 @@
 			</ul>
 		</div>
 		<div class="right_content clearfix">
-				<h3 class="common_title2">订单信息</h3>
+				<h3 class="common_title2"></h3>
 				<div class="site_con">
 					<dl>
-						<dt>当前地址：</dt>
-						<dd>北京市 海淀区 东北旺西路8号中关村软件园 （李思 收） 182****7528</dd>
+						<dt></dt>
+						<dd></dd>
 					</dl>					
 				</div>
-				<h3 class="common_title2">订单管理</h3>
+				<h3 class="common_title2"></h3>
 				<div class="site_con">
 					<form>
-						<div class="total_count">全部商品<em>1</em>件</div>	
+						<!-- <div class="total_count">全部商品<em>1</em>件</div>	 -->
 				<ul class="cart_list_th clearfix">
 					<li class="col01">商品名称</li>
-					<li class="col02">商品单位</li>
-					<li class="col03">商品价格</li>
-					<!-- <li class="col04">数量</li> -->
-					<li class="col05">小计</li>
-					<li class="col06">状态</li>
+					<li class="col02">买家姓名</li>
+					<li class="col03">订单备注</li>
+					<li class="col04">价格</li>
+					<li class="col05">状态</li>
+					<li class="col06">操作</li>
+					
 				</ul>
+				{%for product in products %}
+
 				<ul class="cart_list_td clearfix">
 					<li class="col01">
 						<!-- <input type="checkbox" name="" checked> -->
@@ -49,28 +52,28 @@
 							<option value="less">缺货</option>
 						</select> -->
 					</li>
-					<li class="col02"><img src="static/images/goods/goods012.jpg"></li>
-					<li class="col03"><input type="text" placeholder="商品名称" style="width:70px;margin:11px"></li>
-					<li class="col04"><input type="text" placeholder="商品单位" style="width:70px"></li>
-					<li class="col05"><input type="text" placeholder="商品价格" style="width:70px"></li>
+				
+					<li class="col02"><img src="{{url_for('static', filename='images/products/p1.png')}}"></li>
+					<li class="col03"><p>{{product.name}}</p></li>
+					<li class="col04"><p>姓名</p></li>
+					<li class="col05"><p>备注</p></li>
+					<li class="col06"><p>{{product.price}}</p></li>
+
 					<!-- <li class="col06">
-						<div class="num_add">
+						<div class="num_add">s
 							<a href="javascript:;" class="add fl">+</a>
 							<input type="text" class="num_show fl" value="1">	
 							<a href="javascript:;" class="minus fl">-</a>	
-						</div>
+						</div>s
 					</li> -->
-					<li class="col07"><input type="text" placeholder="小计金额" style="width:70px;"></li>
+					<li class="col07"><p>{{product.status}}</p></li>
 					<li class="col08"><a href="javascript:;">
 						<!-- <input type="submit" value="确认"> -->
-						<select name="address" style="height:20px">
-							<option value="fa">商品发货</option>
-							<option value="less">商品缺货</option>
-							<option value="less">商品充足</option>
-							<input type="submit" value="提交" name="ok" style="height:25px">
-						</select>
+						<input type="submit" value="发货" name="ok">
+						
 					</a></li>
 				</ul>
+				{% endfor %}
 
 					</form>
 				</div>

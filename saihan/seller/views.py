@@ -3,12 +3,13 @@
 from . import app_seller
 from saihan import db
 from flask import render_template,request, url_for
-from saihan.models import Product, Profile
+from saihan.models import Product, Profile,ProductMedia,Order
 from flask_login import current_user, login_required
 # from saihan.models import ...
 
 
 @app_seller.route("/items")
+@login_required
 def seller_items():
     profile = Profile.query.filter_by(user_id=current_user.id).first()
     products = Product.query.filter_by(seller_id=current_user.id)
@@ -20,10 +21,20 @@ def seller_items():
 
 @app_seller.route("/order",methods=["GET","POST"])
 def seller_order():
-    if request.method == "GET":
-        return render_template("seller_order.html")
-    else:
-        pass
+    # name = Product.query.filter_by(seller_id=current_user.id).all()
+    products = Product.query.filter_by(seller_id=current_user.id).all()
+    
+    # l=[]
+    
+    # for order in order:
+    #     order = Order.query.filter_by(product_id=product.id).all()
+    #     l.append(order)
+    
+    return render_template("seller_order.html",products=products
+                                        #  ,orders=orders,l=l,dic=dic
+                                         )
+
+    
         
 
 
@@ -36,6 +47,13 @@ def seller_release():
         description = request.form.get('description')
         price = request.form.get('price')
         picture = request.form.get('picture')
-        user = Product(name=name,description=description,price=price,attachments=picture)
-        db.session.add(user)
+        product = Product(seller_id =current_user.id,name=name,description=description,price=price)
+        
+        db.session.add(product)
+        db.session.commit()
+        photo = ProductMedia(product_id = product.id,filename = picture)
+
+        db.session.add(photo)
+        db.session.commit()
+        return "插入成功"
     
