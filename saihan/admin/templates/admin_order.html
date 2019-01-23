@@ -21,38 +21,37 @@
 				
 			</ul>
 		</div>
-		<div class="right_content clearfix">
+		<div class="right_content clearfix w980">
 				<h3 class="common_title2">全部订单</h3>
 				<ul class="order_list_th w978 clearfix">
-					<li class="col01" style="width: 330px;">商品名称/订单编号</li>
-					<li class="col01" style="width: 80px;">交易状态</li>
-					<li class="col01">购买用户</li>		
+					<li class="col01" style="width: 300px;">商品名称/订单编号</li>
+					<li class="col01" style="width: 190px;">交易状态</li>
+					<li class="col01" style="width: 100px;">买家ID</li>	
+					<li class="col01" style="width: 190px;">创建时间</li>
+					<li class="col01" style="width: 50px;">备注</li>	
 				</ul>
 
 				<table class="order_list_table w980">
 					<tbody>
-						{% for order in orders %}
-						{% for pro in pro_list %}
+						{% for i in range(5) %}
 						<tr>
-							<td width="55%">
+							<td width="50%">
 								<ul class="order_goods_list clearfix">
 									<!-- 商品图片-->
-									<li class="col01"><img style="height:100px;width: 100px;" src='{{ url_for("static", filename="images/usericon/"+user.profile[0].avatar) }}'"></li>
+									<li class="col01"><img style="height:75%;width: 100%;" src='{{url_for("static", filename="images/products/%s"%(pic[i]))}}'></li>
 									<!-- 商品名称和订单编号 -->
-									<li class="col02">{{pro.name}}<em>{{order.product_id}}</em></li>	
+									<li class="col02">{{pro_list[i].name}}<em>{{orders[i].product_id}}</em></li>	
 									<!-- 订单状态 -->
-									<li class="col03">{{order.status}}</li>
+									<li class="col03">{{orders[i].status}}</li>
 									<!-- 订单（商品价格） -->
-									<li class="col04">{{pro.price}}</li>	
+									<li class="col04">{{pro_list[i].price}}</li>	
 								</ul>
 							</td>
 							<!-- 订单购买者ｉｄ -->
-							<td width="15%">{{order.buyer_id}}</td>
-							<!-- 订单卖家ｉｄ -->
-							<td width="15%">{{pro.seller_id}}</td>
-							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
+							<td width="15%">{{orders[i].buyer_id}}</td>
+							<td width="18%">{{orders[i].create_time}}</td>
+							<td width="17%">{{orders[i].comments}}</td>
 						</tr>
-						{% endfor %}
 						{% endfor %}
 					</tbody>
 				</table>

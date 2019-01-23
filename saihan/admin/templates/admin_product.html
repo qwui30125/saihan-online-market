@@ -28,7 +28,7 @@
 						<tr style="height:50px;">
 							<td width="15%">商品图片</td>
 							<td width="15%">商品名称</td>
-							<td width="15%">卖家名称</td>
+							<td width="15%">卖家ID</td>
 							<td width="15%">商品金额</td>
 							<td width="15%">商品状态</td>
 							<td width="15%">商品详情</td>
@@ -42,7 +42,7 @@
 							<td width="15%">{{product.seller_id}}</td>
 							<td width="15%">{{product.price}}</td>
 							<td width="15%">{{product.status}}</td>
-							<td width="15%"><a href="#" class="oper_btn">查看详情</a></td>
+							<td width="15%"><a href="{{url_for('admin.remove_product', product_id=product.id)}}" class="oper_btn">强制删除</a></td>
 						</tr>
 						{% endfor %}
 					</tbody>
