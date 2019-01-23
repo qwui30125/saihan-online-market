@@ -8,9 +8,9 @@ from flask_login import current_user, login_required
 # from saihan.models import ...
 
 # 购物车
-@app_user.route("/cart")
-@login_required
-def user_cart():
+# @app_user.route("/cart")
+# @login_required
+# def user_cart():
     # cart=Cart.query.filter_by(user_id=).all()
     # carts=[]
     # for item in cart:
@@ -26,40 +26,33 @@ def user_cart():
     #     'description':'Product.description',
     #     'price':'Product.price'        
     # }
-    cart = Cart.query.filter_by(user_id=current_user.id)
-    products = []
-    for item in cart:
-        product = Product.query.filter_by(id=item.product_id).first()
-        products.append(product)
-    return render_template("user_cart.html",
-                           user=current_user,
-                           cart=cart,
-                           products=products,
-                           length=len(products))
+    # cart = Cart.query.filter_by(user_id=current_user.id)
+    # products = []
+    # for item in cart:
+    #     product = Product.query.filter_by(id=item.product_id).first()
+    #     products.append(product)
+    # return render_template("user_cart.html",
+    #                        user=current_user,
+    #                        cart=cart,
+    #                        products=products,
+    #                        length=len(products))
     
     # print(help(url_for))
 
 
 
-# 支付界面
-@app_user.route("/place_order")
+# 提交订单界面
+@app_user.route("/place_order/")
+@app_user.route("/place_order/<int:product_id>")
 @login_required
-def place_order(places=None):
-    place1 = {
-    'img_url':'p11.jpg',
-    'danwei':'一块',
-    'xinxi':'卡西欧',
-    'jine':8000
-    }
-    place2 ={
-    'img_url':'p15.jpg',
-    'danjia':'一辆',
-    'xinxi':'劳斯莱斯',
-    'jine':500000
-    }
-    if not places:
-        places = [place1, place2]
-    return render_template("place_order.html",place=places, user=current_user)
+def place_order(product_id=None):
+    if product_id == None:
+        return redirect(url_for("common.index"))
+    product = Product.query.filter_by(id=product_id).first()
+    address = Address.query.filter_by(user_id=current_user.id).first()
+    return render_template("place_order.html",
+                            product=product,
+                            address=address)
 
 
 # 商品详细信息
@@ -67,34 +60,30 @@ def place_order(places=None):
 @login_required
 def detail(product_id=None):
     product = Product.query.filter_by(id=product_id).first()
-    cart = current_user.profile[0].cart
-    count = len(cart)
-    print("count:", count)
     return render_template("product_detail.html", 
                             product=product, 
-                            user=current_user,
-                            count=count)
+                            user=current_user)
 
-@app_user.route('/detail/buy/<int:product_id>')
-@login_required
-def add_to_cart(product_id):
-    product = Product.query.filter_by(id=product_id).first()
-    if product.status == "SELLED":
-        return redirect(url_for("common.error", error="商品已售出"))
-    else:
-        cart = Cart(user_id=current_user.id, product_id=product_id)
-        db.session.add(cart)
-        db.session.commit()
-    return redirect(url_for("user.detail", product_id=product_id))
+# @app_user.route('/detail/buy/<int:product_id>')
+# @login_required
+# def add_to_cart(product_id):
+#     product = Product.query.filter_by(id=product_id).first()
+#     if product.status == "SELLED":
+#         return redirect(url_for("common.error", error="商品已售出"))
+#     else:
+#         cart = Cart(user_id=current_user.id, product_id=product_id)
+#         db.session.add(cart)
+#         db.session.commit()
+#     return redirect(url_for("user.detail", product_id=product_id))
 
 
-@app_user.route('/cart/remove/<int:product_id>')
-@login_required
-def remove_from_cart(product_id):
-    item = Cart.query.filter_by(product_id=product_id, user_id=current_user.id).first()
-    db.session.delete(item)
-    db.session.commit()
-    return redirect(url_for("user.user_cart"))
+# @app_user.route('/cart/remove/<int:product_id>')
+# @login_required
+# def remove_from_cart(product_id):
+#     item = Cart.query.filter_by(product_id=product_id, user_id=current_user.id).first()
+#     db.session.delete(item)
+#     db.session.commit()
+#     return redirect(url_for("user.user_cart"))
 
 
 # 个人简介

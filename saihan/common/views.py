@@ -5,6 +5,7 @@ from saihan import db, login_manager
 from flask import render_template, request, session, redirect, url_for
 from saihan.models import User, Profile, Product
 from flask_login import login_user, current_user, login_required, logout_user
+
 # from saihan.models import ...
 
 @login_manager.user_loader
@@ -18,11 +19,15 @@ def unauthorized():
 @app_common.route("/index")
 def index():
     products = Product.query.all()
-    cart = current_user.profile[0].cart
-    count = len(cart)
-    print("count:", count)
+    user_type = {
+        "PERSONAL": "个人",
+        "BUSINESS":  "商家",
+        "ADVERTISEMENT": "广告商",
+        "ADMINISTRATOR": "管理员"
+    }
     return render_template("index.html", 
                            user=current_user,
+                           user_type=user_type,
                            products=products)
 
 @app_common.route("/register", methods=["POST", "GET"])
@@ -88,6 +93,7 @@ def register():
     profile = Profile(user_id=user.id, mobile=mobile, nickname=username, avatar="saihan.png")
 
     return render_template("error.html", error="注册成功")
+
 
 
 @app_common.route("/login", methods=["GET", "POST"])
