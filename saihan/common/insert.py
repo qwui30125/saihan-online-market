@@ -199,3 +199,13 @@ def insert_address():
     else:
         db.session.commit()
     return "插入成功"
+
+
+@app_common.route("/insert_all_admin_saihan")
+def insert_all():
+    insert_user()
+    insert_profile()
+    insert_product()
+    insert_order()
+    insert_address()
+    return "插入成功"

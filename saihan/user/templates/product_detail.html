@@ -8,10 +8,6 @@
 			<input type="text" class="input_text fl" name="" placeholder="搜索商品">
 			<input type="button" class="input_btn fr" name="" value="搜索">
 		</div>
-		<div class="guest_cart fr">
-			<a href="{{ url_for('user.user_cart') }}" class="cart_name fl">我的购物车</a>
-			<div class="goods_count fl" id="show_count">{{count}}</div>
-		</div>
 	</div>
 
 	<div class="navbar_con">
@@ -62,8 +58,7 @@
 			</div>
 			<div class="total" style="font-size:16px;">总 价：<em>{{product.price}}元</em></div>
 			<div class="operate_btn">
-				<!-- <a href="{{ url_for('user.place_order') }}" class="buy_btn">立即购买</a> -->
-				<a href="{{ url_for('user.add_to_cart', product_id=product.id) }}" class="add_cart" id="add_cart">加入购物车</a>				
+				<a href="{{ url_for('user.place_order', product_id=product.id) }}" class="buy_btn">立即购买</a>			
 			</div>
 		</div>
 	</div>
@@ -90,7 +85,7 @@
 		<div class="r_wrap fr clearfix">
 			<ul class="detail_tab clearfix">
 				<li class="active">商品介绍</li>
-				<li>评论</li>
+				<!-- <li>评论</li> -->
 			</ul>
 
 			<div class="tab_content">

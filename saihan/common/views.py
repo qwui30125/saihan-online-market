@@ -18,9 +18,6 @@ def unauthorized():
 @app_common.route("/index")
 def index():
     products = Product.query.all()
-    cart = current_user.profile[0].cart
-    count = len(cart)
-    print("count:", count)
     return render_template("index.html", 
                            user=current_user,
                            products=products)
