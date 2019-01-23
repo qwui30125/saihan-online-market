@@ -91,6 +91,8 @@ def register():
     # return jsonify(errno=RET.OK, errmsg="注册成功")
     # 注册成功自动生成个人资料
     profile = Profile(user_id=user.id, mobile=mobile, nickname=username, avatar="saihan.png")
+    db.session.add(profile)
+    db.session.commit()
 
     return render_template("error.html", error="注册成功")
 
