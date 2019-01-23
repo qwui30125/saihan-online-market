@@ -2,8 +2,8 @@
 
 from . import app_user
 from saihan import db
-from flask import render_template, url_for, redirect
-from saihan.models import Product, Order, Profile, Cart
+from flask import render_template, url_for, redirect,request
+from saihan.models import Product, Order, Profile, Cart,Address
 from flask_login import current_user, login_required
 # from saihan.models import ...
 
@@ -118,17 +118,68 @@ def user_info():
 @app_user.route('/order')
 @login_required
 def user_order():
-    orders = current_user.profile[0].orders
+
+#         Order　　　        订单
+# ----------------------------------
+# id              订单id
+# product_id      商品id
+# buyer_id        买家id
+# status          状态
+# comments       　备注
+
+    orders = Order.query.filter_by(buyer_id=current_user.id).all()
+    l = []
+    for order in orders:
+        product = Product.query.filter_by(id=order.product_id).first()
+        l.append(product)
+    # orders = current_user.profile[0].orders
+    dic = {
+        "PURCHASED":'买家已付款',
+        "DELIVERED":'卖家已发货',
+        "COMPLETED":'已完成'
+    }
     return render_template("user_order.html",
                            orders=orders,
-                           user=current_user)
-
+                           user=current_user,
+                           l = l,
+                            dic = dic)
 
 # 收货地址
-@app_user.route('/site')
+@app_user.route('/site', methods=["GET","POST"])
 @login_required
 def user_site():
-    return render_template("user_site.html",  user=current_user)
+
+#     Address          　　　　　　　地址
+# ----------------------------------
+# id          　　　　　　　　　　　　主键
+# user_id     　　　　　　　　　　　　用户id
+# country     　　　　　　　　　　　　国家
+# province    　　　　　　　　　　　　省
+# city        　　　　　　　　　　　　城市
+# street      　　　　　　　　　　　　街道
+# name        　　　　　　　　　　　　联系人姓名
+# phone       　　　　　　　　　　　　联系人电话
+    addresses = Address.query.filter_by(user_id=current_user.id).all()
+
+    if request.method == "GET":
+
+        return render_template("user_site.html",
+                                user=current_user,
+                                addresses=addresses,
+                                length=len(addresses))
+
+    name = request.form.get('name')
+    phone = request.form.get('phone')
+    country = request.form.get('country')
+    city = request.form.get('city')
+    street = request.form.get('street')
+    province = request.form.get('province')
+    address = Address(user_id=current_user.id,name=name,phone=phone,country=country,city=city,street=street,province=province)
+    print(address)
+    db.session.add(address)
+    db.session.commit()
+
+    return render_template("user_site.html",  user=current_user,addresses=addresses)
 
 # 实名认证
 @app_user.route('/auth')
