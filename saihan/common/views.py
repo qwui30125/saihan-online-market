@@ -18,19 +18,17 @@ def unauthorized():
 
 @app_common.route("/index")
 def index():
-<<<<<<< HEAD
     products = Product.query.all()
+    user_type = {
+        "PERSONAL": "个人",
+        "BUSINESS":  "商家",
+        "ADVERTISEMENT": "广告商",
+        "ADMINISTRATOR": "管理员"
+    }
     return render_template("index.html", 
                            user=current_user,
+                           user_type=user_type,
                            products=products)
-=======
-    if 'username' in session:
-        user_id = session["user_id"]
-        username = session["username"]
-        return render_template("index.html", username=username)
-    return render_template("index.html")
-
->>>>>>> zy
 
 @app_common.route("/register", methods=["POST", "GET"])
 def register():
@@ -90,16 +88,12 @@ def register():
         raise
         return render_template("error.html", error="查询数据库异常")
     # # 返回结果
-<<<<<<< HEAD
     # return jsonify(errno=RET.OK, errmsg="注册成功")
     # 注册成功自动生成个人资料
     profile = Profile(user_id=user.id, mobile=mobile, nickname=username, avatar="saihan.png")
 
     return render_template("error.html", error="注册成功")
-=======
-    flash('登录成功')
-    return redirect(url_for("common.index"))
->>>>>>> zy
+
 
 
 @app_common.route("/login", methods=["GET", "POST"])
@@ -136,7 +130,6 @@ def login():
     login_user(user)
     # print(user)
     # 如果验证相同成功，保存登录状态， 在session中
-<<<<<<< HEAD
     # return render_template("error.html", error=user.type)
     if user.type == "PERSONAL":
         return redirect(url_for("common.index"))
@@ -149,27 +142,6 @@ def login():
 
 @app_common.route("/logout")
 @login_required
-=======
-    session["username"] = user.username
-    session["user_id"] = user.id
-
-    flash('登录成功')
-    return redirect(url_for("common.index"))
-
-@app_common.route("/session", methods=["GET"])
-def check_login():
-    """检查登陆状态"""
-    # 尝试从session中获取用户的名字
-    username = session.get("username")
-    # 如果session中数据name名字存在，则表示用户已登录，否则未登录
-    if username is not None:
-        return "已登录"
-    else:
-        return "未登录"
-
-
-@app_common.route("/session", methods=["DELETE"])
->>>>>>> zy
 def logout():
     logout_user()
     return redirect(url_for("common.index"))
