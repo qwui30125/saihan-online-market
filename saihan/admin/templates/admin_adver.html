@@ -2,7 +2,7 @@
 {% block body %}
 
 	<div class="search_bar clearfix">
-		<a href="index.html" class="logo fl" id="shLogo"><img src="static/images/saihan1.png"></a>
+		<a href="{{ url_for('common.index') }}" class="logo fl" id="shLogo"><img src="{{url_for('static', filename='images/logo/saihan.png')}}" style="width:100%;height:100%"></a>
 		<div class="sub_page_name fl">|&nbsp;&nbsp;&nbsp;&nbsp;管理员中心</div>
 		<div class="search_con fr">
 			<input type="text" class="input_text fl" name="" placeholder="输入广告名称或编号">
@@ -35,7 +35,7 @@
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
+									<li class="col01"><img src="{{url_for('static', filename='images/logo/saihan.png')}}"></li>
 									<li class="col02">满记甜品<em>SHAD201800010</em></li>	
 									<li class="col03">餐饮</li>
 									<li class="col04">118.0元／月</li>	
@@ -48,7 +48,7 @@
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-										<li class="col01"><img src="static/images/saihan.png"></li>
+										<li class="col01"><img src="{{url_for('static', filename='images/logo/saihan.png')}}"></li>
 										<li class="col02">安记手抓饭<em>SHAD201800008</em></li>	
 										<li class="col03">餐饮</li>
 										<li class="col04">11.80元／月</li>	
@@ -61,7 +61,7 @@
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
+									<li class="col01"><img src="{{url_for('static', filename='images/logo/saihan.png')}}"></li>
 									<li class="col02">大众点评<em>SHAD201800001</em></li>	
 									<li class="col03">网站推广</li>
 									<li class="col04">1180元／月</li>	
@@ -69,12 +69,12 @@
 							</td>
 							<td width="15%">已审核</td>
 							<td width="15%">已付款</td>
-							<td width="15%"><a href="#" class="oper_btn">查看信息</a></td>
+							<td width="15%"><a href="#" class="oper_btn">强制删除</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
+									<li class="col01"><img src="{{url_for('static', filename='images/logo/saihan.png')}}"></li>
 									<li class="col02">滴滴出行<em>SHAD20180000２</em></li>	
 									<li class="col03">APP推广</li>
 									<li class="col04">3090元／月</li>	
@@ -82,12 +82,12 @@
 							</td>
 							<td width="15%">已审核</td>
 							<td width="15%">已付款</td>
-							<td width="15%"><a href="#" class="oper_btn">查看信息</a></td>
+							<td width="15%"><a href="#" class="oper_btn">强制删除</a></td>
 						</tr>
 						<tr>
 							<td width="55%">
 								<ul class="order_goods_list clearfix">					
-									<li class="col01"><img src="static/images/saihan.png"></li>
+									<li class="col01"><img src="{{url_for('static', filename='images/logo/saihan.png')}}"></li>
 									<li class="col02">满记甜品<em>SHAD201800010</em></li>	
 									<li class="col03">餐饮</li>
 									<li class="col04">118.0元／月</li>	

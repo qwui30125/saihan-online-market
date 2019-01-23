@@ -2,9 +2,9 @@
 
 from . import app_admin
 from saihan import db
-from flask import render_template
+from flask import render_template,redirect,url_for
 from flask_login import current_user
-from saihan.models import User, Profile, Authenticate, Product
+from saihan.models import User, Profile, Authenticate, Product , Order,ProductMedia
 # from saihan.models import ...
 
 @app_admin.route("/user/")
@@ -13,11 +13,10 @@ def admin_user(page=1):
     admin = current_user
     # user_cout = len(User.query.all())
     # print(user_cout)
-    users = User.query.limit(5).offset((page-1)*5)
+    users = Profile.query.limit(5).offset((page-1)*5)
     for user in users:
         # print(user.profile)
         user.authenticate = Authenticate.query.filter_by(user_id=user.id).first()
-
     return render_template("admin_user.html",
                            users=users)
 
@@ -31,72 +30,40 @@ def admin_product(page=1):
 @app_admin.route("/order/")
 @app_admin.route("/order/<int:page>")
 def admin_order(page=1):
-    # profile = Profile.query.limit(5)
-    # profile = Profile.query.limit(5).offset(6)
-    # profile = Profile.query.count(Profile.id)
-    # profile.id 
-    # page = 2
-    # n = 5
-    # m = 5*(page-1)
-    # product = Product.query.limit()
-    order_list = [
-        {
-            "pro_name":Product.name,
-            "order_id":Order.id,
-            "statu":Order.status,
-            "buyer_id":Order.buyer_id,
-            "pro_pic":Order.attachments,
-            "order_price":Order.price,
-            "seller_id":Order.seller_id
-        },
-        {
-            "pro_name":Product.name,
-            "order_id":Order.id,
-            "statu":Order.status,
-            "buyer_id":Order.buyer_id,
-            "pro_pic":Order.attachments,
-            "order_price":Order.price,
-            "seller_id":Order.seller_id 
-        },
-        {
-            "pro_name":Product.name,
-            "order_id":Order.id,
-            "statu":Order.status,
-            "buyer_id":Order.buyer_id,
-            "pro_pic":Order.attachments,
-            "order_price":Order.price,
-            "seller_id":Order.seller_id
-        },
-        {
-            "pro_name":Product.name,
-            "order_id":Order.id,
-            "statu":Order.status,
-            "buyer_id":Order.buyer_id,
-            "pro_pic":Order.attachments,
-            "order_price":Order.price,
-            "seller_id":Order.seller_id 
-        },
-        {
-            "pro_name":Product.name,
-            "order_id":Order.id,
-            "statu":Order.status,
-            "buyer_id":Order.buyer_id,
-            "pro_pic":Order.attachments,
-            "order_price":Order.price,
-            "seller_id":Order.seller_id 
-        }
-    ]
-    return render_template("admin_order.html",order_list=order_list)
+    orders = Order.query.limit(5).offset((page-1)*5)
+    pro_list = []
+    for order in orders:
+        product = Product.query.filter_by(id = order.product_id)
+        pro_list.append(product)
+    pic = []
+    for order in orders:
+        pro = ProductMedia.query.filter_by(id = order.product_id).first()
+        pic.append(pro.filename)
+    return render_template("admin_order.html",pro_list = pro_list,orders = orders,pic = pic)
 
 @app_admin.route("/adver/")
 @app_admin.route("/adver/<int:page>")
 def admin_adver(page=1):
-    ad_list = [
-        {
-            "ad_id":"AdverSH0002",
-            "ad_name":"赵吏",
-            "ad_pic":"static/images/li.jpeg",
-            "ad_price":""
-        }
-    ]
-    return render_template("admin_adver.html",ad_list = da_list)
+    return render_template("admin_adver.html")
+
+# 以下为删除信息视图函数
+@app_admin.route('/remove_user/<int:user_id>')
+def remove_user(user_id):
+    item = User.query.filter_by(id=user_id).first()
+    db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for("admin.admin_user"))
+
+@app_admin.route('/remove_order/<int:order_id>')
+def remove_order(order_id):
+    item = Order.query.filter_by(id=order_id).first()
+    db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for("admin.admin_order"))
+
+@app_admin.route('/remove_product/<int:product_id>')
+def remove_product(product_id):
+    item = Product.query.filter_by(id=product_id).first()
+    db.session.delete(item)
+    db.session.commit()
+    return redirect(url_for("admin.admin_product"))
