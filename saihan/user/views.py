@@ -127,11 +127,13 @@ def user_order():
         "DELIVERED":'卖家已发货',
         "COMPLETED":'已完成'
     }
+    print(len(orders))
     return render_template("user_order.html",
                            orders=orders,
                            user=current_user,
                            l = l,
-                            dic = dic)
+                           dic = dic,
+                           length=len(orders))
 
 # 收货地址
 @app_user.route('/site', methods=["GET","POST"])
@@ -167,11 +169,26 @@ def user_site():
     print(address)
     db.session.add(address)
     db.session.commit()
-
-    return render_template("user_site.html",  user=current_user,addresses=addresses)
+    addresses = Address.query.filter_by(user_id=current_user.id).all()
+    return render_template("user_site.html",
+                            user=current_user,
+                            addresses=addresses,
+                            length=len(addresses))
 
 # 实名认证
 @app_user.route('/auth')
 @login_required
 def user_auth():
     return render_template("user_auth.html",  user=current_user)
+
+
+@app_user.route('/remove_site/<int:site_id>')
+def remove_site(site_id):
+    site = Address.query.filter_by(id=site_id).first()
+    db.session.delete(site)
+    db.session.commit()
+    addresses = Address.query.filter_by(user_id=current_user.id).all()
+    return redirect(url_for("user.user_site",
+                            user=current_user,
+                            addresses=addresses,
+                            length=len(addresses)))

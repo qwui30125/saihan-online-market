@@ -42,8 +42,7 @@
 					<li class="col06">操作</li>
 					
 				</ul>
-				{%for product in products %}
-
+				{% for i in range(length) %}
 				<ul class="cart_list_td clearfix">
 					<li class="col01">
 						<!-- <input type="checkbox" name="" checked> -->
@@ -53,11 +52,11 @@
 						</select> -->
 					</li>
 				
-					<li class="col02"><img src="{{url_for('static', filename='images/products/p1.png')}}"></li>
-					<li class="col03"><p>{{product.name}}</p></li>
-					<li class="col04"><p>姓名</p></li>
-					<li class="col05"><p>备注</p></li>
-					<li class="col06"><p>{{product.price}}</p></li>
+					<li class="col02"><img src="{{url_for('static', filename='images/products/'+products[i].attachments[0].filename)}}"></li>
+					<li class="col03"><p>{{products[i].name}}</p></li>
+					<li class="col04"><p>{{users[i].nickname}}</p></li>
+					<li class="col05"><p>{{orders[i].comments}}</p></li>
+					<li class="col06"><p>{{products[i].price}}</p></li>
 
 					<!-- <li class="col06">
 						<div class="num_add">s
@@ -66,7 +65,7 @@
 							<a href="javascript:;" class="minus fl">-</a>	
 						</div>s
 					</li> -->
-					<li class="col07"><p>{{product.status}}</p></li>
+					<li class="col07"><p>{{orders[i].status}}</p></li>
 					<li class="col08"><a href="javascript:;">
 						<!-- <input type="submit" value="确认"> -->
 						<input type="submit" value="发货" name="ok">

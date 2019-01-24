@@ -34,7 +34,8 @@
 					<dl>
 						<dt>可选地址：</dt>
 					{% for i in range(length) %}
-						<dd>{{addresses[i].country}} {{addresses[i].province}} {{addresses[i].city}} {{addresses[i].street}} {{addresses[i].name}} {{addresses[i].phone}}</dd>
+						<dd>{{addresses[i].country}} {{addresses[i].province}} {{addresses[i].city}} {{addresses[i].street}} {{addresses[i].name}} {{addresses[i].phone}}
+						<a href="{{ url_for('user.remove_site', site_id=addresses[i].id) }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除</a></dd>
 					{%endfor%}				
 					</dl>
 				</div>

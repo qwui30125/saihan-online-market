@@ -27,10 +27,10 @@
 						<tr style="height:50px;">
 							<td width="15%">头像</td>
 							<td width="15%">用户名</td>
-							<td width="15%">更新时间</td>
+							<td width="15%">注册时间</td>
 							<td width="15%">手机号码</td>
 							<td width="15%">是否实名</td>
-							<td width="10%">注册时间</td>
+							<td width="10%">操作</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -38,14 +38,14 @@
 						<tr>
 							<td width="15%"><img style="height:100px;width: 100px;" src='{{ url_for("static", filename="images/usericon/"+user.avatar) }}'></td>
 							<td width="15%">{{user.nickname}}</td>
-							<td width="15%">{{user.update_time}}</td>
+							<td width="15%">{{user.create_time}}</td>
 							<td width="15%">{{user.mobile}}</td>
 							{% if not user.authenticate %}
 							<td width="15%">未认证</td>
 							{% else %}
 							<td width="15%">{{user.authenticate}}</td>
 							{% endif %}
-							<td width="10%">{{user.create_time}}</td>
+							<td width="10%">查看详情</td>
 						</tr>
 						{% endfor %}
 						

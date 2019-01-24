@@ -2,7 +2,7 @@
 
 from . import app_seller
 from saihan import db
-from flask import render_template,request, url_for
+from flask import render_template,request, url_for, current_app
 from saihan.models import Product, Profile,ProductMedia,Order
 from flask_login import current_user, login_required
 # from saihan.models import ...
@@ -23,16 +23,23 @@ def seller_items():
 def seller_order():
     # name = Product.query.filter_by(seller_id=current_user.id).all()
     products = Product.query.filter_by(seller_id=current_user.id).all()
+    # print(current_app.config["UPLOAD_FOLDER"])
+    order_list = []
+    product_list = []
+    user_list = []
+    for product in products:
+        orders = Order.query.filter_by(product_id=product.id).all()
+        for order in orders:
+            user_profile = Profile.query.filter_by(user_id=order.buyer_id).first()
+            user_list.append(user_profile)
+            order_list.append(order)
+            product_list.append(product)
     
-    # l=[]
-    
-    # for order in order:
-    #     order = Order.query.filter_by(product_id=product.id).all()
-    #     l.append(order)
-    
-    return render_template("seller_order.html",products=products
-                                        #  ,orders=orders,l=l,dic=dic
-                                         )
+    return render_template("seller_order.html",
+                            products=product_list,
+                            orders=order_list,
+                            users=user_list,
+                            length=len(orders))
 
     
         
@@ -43,17 +50,23 @@ def seller_release():
     if request.method == "GET":
         return render_template("seller_release.html")
     else:
-        name = request.form.get('name')
-        description = request.form.get('description')
-        price = request.form.get('price')
-        picture = request.form.get('picture')
+        # name = request.form.get('name')
+        # description = request.form.get('description')
+        # price = request.form.get('price')
+        # picture = request.form.get('picture')
         product = Product(seller_id =current_user.id,name=name,description=description,price=price)
         
-        db.session.add(product)
-        db.session.commit()
-        photo = ProductMedia(product_id = product.id,filename = picture)
+        # db.session.add(product)
+        # db.session.commit()
+        upload_folder = current_app.config['UPLOAD_FOLDER']
+        # picture = ProductMedia(product_id = product.id,filename = picture)
 
-        db.session.add(photo)
-        db.session.commit()
+        # prod_img = request.files.get("picture")
+        print(request.json)
+        print(prod_img)
+
+
+        # db.session.add(photo)
+        # db.session.commit()
         return "插入成功"
     
