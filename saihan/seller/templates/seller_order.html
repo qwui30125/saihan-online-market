@@ -22,17 +22,17 @@
 			</ul>
 		</div>
 		<div class="right_content clearfix">
-				<h3 class="common_title2"></h3>
-				<div class="site_con">
+				<!-- <h3 class="common_title2"></h3> -->
+			<!-- 	<div class="site_con">
 					<dl>
 						<dt></dt>
 						<dd></dd>
 					</dl>					
-				</div>
-				<h3 class="common_title2"></h3>
-				<div class="site_con">
-					<form>
-						<!-- <div class="total_count">全部商品<em>1</em>件</div>	 -->
+				</div> -->
+				<!-- <h3 class="common_title2"></h3> -->
+				<!-- <div class="site_con"> -->
+					<!-- <form> -->
+				<div class="total_count">全部商品<em>{{length}}</em>件</div>	
 				<ul class="cart_list_th clearfix">
 					<li class="col01">商品名称</li>
 					<li class="col02">买家姓名</li>
@@ -65,7 +65,7 @@
 							<a href="javascript:;" class="minus fl">-</a>	
 						</div>s
 					</li> -->
-					<li class="col07"><p>{{orders[i].status}}</p></li>
+					<li class="col07"><p>{{stat_dict[orders[i].status]}}</p></li>
 					<li class="col08"><a href="javascript:;">
 						<!-- <input type="submit" value="确认"> -->
 						<input type="submit" value="发货" name="ok">
@@ -74,7 +74,7 @@
 				</ul>
 				{% endfor %}
 
-					</form>
+					<!-- </form> -->
 				</div>
 		</div>
 	</div>

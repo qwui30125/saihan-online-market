@@ -123,9 +123,11 @@ def user_order():
         l.append(product)
     # orders = current_user.profile[0].orders
     dic = {
+        "PENDING":"未付款",
         "PURCHASED":'买家已付款',
         "DELIVERED":'卖家已发货',
-        "COMPLETED":'已完成'
+        "COMPLETED":'已完成',
+        "CANCELLED":"已取消"
     }
     print(len(orders))
     return render_template("user_order.html",

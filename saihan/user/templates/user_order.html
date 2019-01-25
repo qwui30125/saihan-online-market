@@ -47,7 +47,11 @@
 									<li class="col02" style="text-align:left;margin-left:30px;">{{l[i].name}}</li>
 								</ul>
 							</td>
+							{% if orders[i].comments == None %}
+							<td width="15%">无</li>
+							{% else %}
 							<td width="15%">{{orders[i].comments}}</li>
+							{% endif %}
 							<td width="15%">{{l[i].price}}元</td>
 							<td width="15%">{{ dic[orders[i].status] }}</td>
 							<!-- <td width="15%"><a href="#" class="oper_btn">查看物流</a></td> -->

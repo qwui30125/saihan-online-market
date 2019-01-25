@@ -66,6 +66,7 @@
 			<div class="item-list-wrap">
 				<!-- 循环获取商品 -->
 				{% for product in products %}
+				{% if product.status == "SELLING" %}
 				<a href="{{ url_for('user.detail', product_id=product.id) }}" class="item-wrap">
 					<div class="item-img" style="background-image: url({{ url_for('static', filename='images/products/'+product.attachments[0].filename) }})"></div>
 					<div class="item-info">
@@ -84,6 +85,7 @@
 						</div>
 					</div>
 				</a>
+				{% endif %}
 				{% endfor %}
 
 			</div>

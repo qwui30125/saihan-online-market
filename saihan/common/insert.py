@@ -76,15 +76,24 @@ def insert_product():
     sellerA = User.query.filter_by(username='sellerA').first()
     sellerB = User.query.filter_by(username='sellerB').first()
 
-    productAA = Product(seller_id=sellerA.id, name="内向性格的竞争力", price="50", description="未拆封,半价转卖")
-    productAB = Product(seller_id=sellerA.id, name="大明", price="40", description="未拆封,半价转卖")
-    productAC = Product(seller_id=sellerA.id, name="金庸传", price="45", description="未拆封,半价转卖")
-    productAD = Product(seller_id=sellerA.id, name="了不起的莎士比亚", price="60", description="未拆封,半价转卖")
-    productBA = Product(seller_id=sellerB.id, name="二手车11", price="5000", description="一口价")
-    productBB = Product(seller_id=sellerB.id, name="二手车22", price="4000", description="一口价")
-    productBC = Product(seller_id=sellerB.id, name="二手车33", price="4500", description="一口价")
-    productBD = Product(seller_id=sellerB.id, name="二手车44", price="6000", description="一口价")
-    products = [productAA, productAB, productAC, productAD, productBA, productBB, productBC, productBD]
+    productAA = Product(seller_id=sellerA.id, name="内向性格的竞争力", price="50", description="未拆封,半价转卖",status="SELLED")
+    productAB = Product(seller_id=sellerA.id, name="大明", price="40", description="未拆封,半价转卖",status="SELLED")
+    productAC = Product(seller_id=sellerA.id, name="金庸传", price="45", description="未拆封,半价转卖",status="SELLED")
+    productAD = Product(seller_id=sellerA.id, name="了不起的莎士比亚", price="60", description="未拆封,半价转卖",status="SELLED")
+    productBA = Product(seller_id=sellerA.id, name="二手车11", price="5000", description="一口价",status="SELLED")
+    productBB = Product(seller_id=sellerA.id, name="二手车22", price="4000", description="一口价",status="SELLED")
+    productBC = Product(seller_id=sellerA.id, name="二手车33", price="4500", description="一口价",status="SELLED")
+    productBD = Product(seller_id=sellerB.id, name="二手车44", price="6000", description="一口价",status="SELLED")
+    productCA = Product(seller_id=sellerB.id, name="二手房11", price="50000", description="一口价")
+    productCB = Product(seller_id=sellerA.id, name="二手房22", price="40000", description="一口价")
+    productCC = Product(seller_id=sellerB.id, name="二手房33", price="45000", description="一口价")
+    productCD = Product(seller_id=sellerB.id, name="二手房44", price="60000", description="一口价")
+    productDA = Product(seller_id=sellerB.id, name="手表11", price="150000", description="一口价")
+    productDB = Product(seller_id=sellerB.id, name="手表22", price="140000", description="一口价")
+    productDC = Product(seller_id=sellerB.id, name="手表33", price="145000", description="一口价")
+    productDD = Product(seller_id=sellerB.id, name="手表44", price="160000", description="一口价")
+    products = [productAA, productAB, productAC, productAD, productBA, productBB, productBC, productBD,
+                productCA, productCB, productCC, productCD, productDA, productDB, productDC, productDD]
     try:
         db.session.add_all(products)
     except:
@@ -102,11 +111,20 @@ def insert_product():
     prod_imgAB = ProductMedia(product_id=productAB.id, filename="p4.jpg")
     prod_imgAC = ProductMedia(product_id=productAC.id, filename="p2.jpg")
     prod_imgAD = ProductMedia(product_id=productAD.id, filename="p1.jpg")
-    prod_imgBA = ProductMedia(product_id=productBA.id, filename="p14.jpg")
-    prod_imgBB = ProductMedia(product_id=productBB.id, filename="p15.jpg")
-    prod_imgBC = ProductMedia(product_id=productBC.id, filename="p16.jpg")
-    prod_imgBD = ProductMedia(product_id=productBD.id, filename="p17.jpg")
-    prod_imgs = [prod_imgAA, prod_imgAB, prod_imgAC, prod_imgAD, prod_imgBA, prod_imgBB, prod_imgBC, prod_imgBD]
+    prod_imgBA = ProductMedia(product_id=productBA.id, filename="p13.jpg")
+    prod_imgBB = ProductMedia(product_id=productBB.id, filename="p14.jpg")
+    prod_imgBC = ProductMedia(product_id=productBC.id, filename="p15.jpg")
+    prod_imgBD = ProductMedia(product_id=productBD.id, filename="p16.jpg")
+    prod_imgCA = ProductMedia(product_id=productCA.id, filename="p5.jpg")
+    prod_imgCB = ProductMedia(product_id=productCB.id, filename="p6.jpg")
+    prod_imgCC = ProductMedia(product_id=productCC.id, filename="p7.jpg")
+    prod_imgCD = ProductMedia(product_id=productCD.id, filename="p8.jpg")
+    prod_imgDA = ProductMedia(product_id=productDA.id, filename="p10.jpg")
+    prod_imgDB = ProductMedia(product_id=productDB.id, filename="p11.jpg")
+    prod_imgDC = ProductMedia(product_id=productDC.id, filename="p12.jpg")
+    prod_imgDD = ProductMedia(product_id=productDD.id, filename="p17.jpg")
+    prod_imgs = [prod_imgAA, prod_imgAB, prod_imgAC, prod_imgAD, prod_imgBA, prod_imgBB, prod_imgBC, prod_imgBD,
+            prod_imgCA, prod_imgCB, prod_imgCC, prod_imgCD, prod_imgDA, prod_imgDB, prod_imgDC, prod_imgDD]
     try:
         db.session.add_all(prod_imgs)
     except:
@@ -140,16 +158,14 @@ def insert_order():
     userB = User.query.filter_by(username='userB').first()
 
     order1 = Order(product_id=1, buyer_id=userA.id, status="PENDING")
-    order2 = Order(product_id=1, buyer_id=userA.id, status="PURCHASED", comments="包邮")
-    order3 = Order(product_id=2, buyer_id=userA.id, status="DELIVERED")
-    order4 = Order(product_id=2, buyer_id=userA.id, status="COMPLETED")
-    order5 = Order(product_id=3, buyer_id=userA.id, status="CANCELLED")
-    order6 = Order(product_id=4, buyer_id=userB.id, status="PENDING", comments="包邮")
-    order7 = Order(product_id=4, buyer_id=userB.id, status="PURCHASED", comments="寄顺丰")
-    order8 = Order(product_id=5, buyer_id=userB.id, status="DELIVERED")
-    order9 = Order(product_id=5, buyer_id=userB.id, status="COMPLETED", comments="寄申通")
-    orderA = Order(product_id=6, buyer_id=userB.id, status="CANCELLED")
-    orders = [order1, order2, order3, order4, order5, order6, order7, order8, order9, orderA]
+    order2 = Order(product_id=2, buyer_id=userA.id, status="PURCHASED", comments="包邮")
+    order3 = Order(product_id=3, buyer_id=userA.id, status="DELIVERED")
+    order4 = Order(product_id=4, buyer_id=userA.id, status="COMPLETED")
+    order5 = Order(product_id=5, buyer_id=userA.id, status="CANCELLED")
+    order6 = Order(product_id=6, buyer_id=userB.id, status="PENDING", comments="包邮")
+    order7 = Order(product_id=7, buyer_id=userB.id, status="PURCHASED", comments="寄顺丰")
+    order8 = Order(product_id=8, buyer_id=userB.id, status="COMPLETED", comments="寄申通")
+    orders = [order1, order2, order3, order4, order5, order6, order7, order8]
     try:
         db.session.add_all(orders)
     except:

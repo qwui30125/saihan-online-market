@@ -53,22 +53,19 @@
 					</a></li>
 				</ul> -->
 				<div class="reg_form clearfix">
-					<form id="prod_release">
+					<form class="prod_release">
 					<ul>
 						<li>
 							<label>商品名称:</label>
-							<input type="text" name="name" id="user_name" placeholder="">
-							<!-- <span class="error_tip">提示信息</span> -->
+							<input type="text" name="name">
 						</li>					
 						<li>
 							<label>详细信息:</label>
-							<input type="text" name="description" id="pwd">
-							<!-- <span class="error_tip">提示信息</span> -->
+							<input type="text" name="description">
 						</li>
 						<li>
 							<label>金额:</label>
-							<input type="text" name="price" id="cpwd">
-							<!-- <span class="error_tip">提示信息</span> -->
+							<input type="number" name="price">
 						</li>
 						<li>
 							<label>图片:</label>
@@ -85,31 +82,6 @@
 				
 		</div>
 	</div>
-	<script type="text/javascript">
-        function release() {
-            var form = $("#prod_release");
-            var fd = new FormData(form);
-            console.log(fd);
-            $.ajax({
-            //几个参数需要注意一下
-                type: "POST",//方法类型
-                dataType: "json",//预期服务器返回的数据类型
-                url: "{{ url_for('seller.seller_release') }}" ,//url
-                data: fd,
-                success: function (result) {
-                    console.log(result);//打印服务端返回的数据(调试用)
-                    if (result.resultCode == 200) {
-                        alert("提交成功");
-                    }
-                    ;
-                },
-                error : function() {
-                    alert("提交失败！");
-                }
-            });
-        }
-    </script>
-
 	<div class="footer">
 		<div class="foot_link">
 			<a href="#">关于我们</a>
@@ -123,6 +95,32 @@
 		<p>CopyRight © 2016 All Rights Reserved</p>
 		<p>电话：010-****888    京ICP备*******8号</p>
 	</div>
+	<script type="text/javascript">
+        function release() {
+            var form = $(".prod_release")[0];
+            console.log(form)
+            var fd = new FormData(form);
+            console.log(fd.get("price"));
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                url: "{{ url_for('seller.seller_release') }}" ,//url
+                data: fd,
+                processData: false,  // 不处理数据
+			  	contentType: false,  // 不设置内容类型
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+                    if (result.resultCode == 200) {
+                        alert("提交成功");
+                    }
+                    ;
+                },
+                error : function() {
+                    alert("提交失败！");
+                }
+            });
+        }
+    </script>
 	
 </body>
 {% endblock %}

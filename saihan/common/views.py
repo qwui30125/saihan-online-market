@@ -6,7 +6,7 @@ from flask import render_template, request, session, redirect, url_for
 from saihan.models import User, Profile, Product
 from flask_login import login_user, current_user, login_required, logout_user
 
-# from saihan.models import ...
+
 
 @login_manager.user_loader
 def load_user(user_id):

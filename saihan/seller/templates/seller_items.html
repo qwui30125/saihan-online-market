@@ -52,7 +52,7 @@
 						<span>{{ product.name }}</span></td>
 						<td class="price">{{ product.price }}</td>
 						<!-- <td class="count"><span class="reduce">-</span><input class="count-input" type="text" value="1"/><span class="add">+</span></td> -->
-						<td class="subtotal">{{ product.status }}</td>
+						<td class="subtotal">{{ prod_stat[product.status] }}</td>
 						<td class="operation"><span class="delete">删除</span></td>
 						</tr>
 						{% endfor %}
