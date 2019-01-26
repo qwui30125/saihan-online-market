@@ -2,10 +2,12 @@
 
 from . import app_common
 from saihan import db, login_manager
-from flask import render_template, request, session, redirect, url_for
+from flask import render_template, request, session, redirect, url_for, jsonify
 from saihan.models import User, Profile, Product
 from flask_login import login_user, current_user, login_required, logout_user
-
+from saihan.libs.yuntongxun.sms import CCP
+sms_code = 0 
+import random
 
 
 @login_manager.user_loader
@@ -19,7 +21,7 @@ def unauthorized():
 @app_common.route("/index")
 def index():
     products = Product.query.all()
-    user_type = {
+    user_type = { 
         "PERSONAL": "个人",
         "BUSINESS":  "商家",
         "ADVERTISEMENT": "广告商",
@@ -49,11 +51,14 @@ def register():
     password = req_dict.get("pwd")
     password2 = req_dict.get("cpwd")
     mobile = req_dict.get("mobile")
+    newsms_code = req_dict.get("newsms_code")
+    if sms_code != newsms_code:
+        return render_template("error.html", error="验证码错误")
     # print(username)
     # print(password)
 
     # 校验参数
-    if not all([username, password, password2, mobile]):
+    if not all([username, password, password2, mobile, newsms_code]):
         return render_template("error.html", error="参数不完整")
 
     # 密码验证
@@ -147,3 +152,22 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for("common.index"))
+
+@app_common.route("/smscode")
+@app_common.route("/smscode/<mobile>", methods=["GET", "POST"])
+def smscode(mobile=None):
+     # 生成短信验证码
+    global sms_code
+    sms_code = "%06d" % random.randint(0, 999999)
+
+    #定义mobile的手机号
+    try:
+        ccp = CCP()
+        result = ccp.send_template_sms(mobile, [sms_code, 5], 1)
+    except Exception as e:
+        print(e)
+        return ""
+    # 返回值
+    # 发送成功
+    r = {"mobile":mobile}
+    return jsonify(r)

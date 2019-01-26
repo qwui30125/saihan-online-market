@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>确认支付</title>
+    <style>
+        body{
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <img src="{{ url_for('static', filename='images/payicons/pay.jpg') }}"></img>
+    <p>
+        <a href="{{ url_for('common.index') }}" type="submit">支付完成，回到首页</a>
+    </p>
+    
+</body>
+</html>

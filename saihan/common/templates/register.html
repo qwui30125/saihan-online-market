@@ -16,7 +16,7 @@
 				<form method="POST" action="register">
 				<ul>
 					<li>
-						<label>用户名:</label>
+						<label>用户名:</label> 
 						<input type="text" name="username" id="user_name">
 						<span class="error_tip">提示信息</span>
 					</li>					
@@ -32,8 +32,19 @@
 					</li>
 					<li>
 						<label>手机号:</label>
-						<input type="text" name="mobile" id="mobile">
+						<input type="text" name="mobile" id="mobile" >
+						<div class="phonecode">
+						</div>
 						<span class="error_tip">提示信息</span>
+						<!-- <input id="submit-button" type="submit" value="获取验证码" name=""> -->
+						<!-- <button class="button"  -->
+						
+					</li>
+					<li>
+						<!-- 昨天改的 -->
+						<label>验证码:</label>
+						<input style="display: inline-block;width:160px;" type="text" class="form-control" name="newsms_code" id="mobile" required>
+						<input style="display: inline-block;width:auto;height:40px;padding:0 10px;border-left:none;" type="button" name="b1" onclick="fsubmit()" value="获取短信验证码 " />
 					</li>
 					<!-- <li class="agreement">
 						<input type="checkbox" name="allow" id="allow" checked="checked">
@@ -48,7 +59,23 @@
 			</div>
 
 		</div>
-
 	</div>
+	<script type="text/javascript">
+        function fsubmit() {
+            var mobile = $("input[name='mobile']").val();
+            console.log(mobile);
+            var button = $("input[name='b1']");
+            button.disabled = "disabled";
+            button.value="等待60s再次发送";
+            fetch("{{ url_for('common.smscode') }}"+"/"+mobile)
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(myJson) {
+                console.log(myJson);
+            });
+
+        }
+        </script>
 
 {% endblock %}

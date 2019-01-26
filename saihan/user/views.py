@@ -194,3 +194,9 @@ def remove_site(site_id):
                             user=current_user,
                             addresses=addresses,
                             length=len(addresses)))
+
+# 付款页面
+@app_user.route('/pay')
+@login_required
+def user_pay():
+    return render_template("pay.html")
